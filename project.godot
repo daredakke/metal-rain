@@ -26,6 +26,7 @@ window/stretch/scale_mode="integer"
 
 folder_colors={
 "res://assets/": "blue",
+"res://resources/": "green",
 "res://scenes/": "yellow",
 "res://scripts/": "red"
 }

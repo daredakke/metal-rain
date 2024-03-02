@@ -8,6 +8,7 @@
 radius = 11.0
 
 [node name="Gun" type="Area2D"]
+z_index = 10
 script = ExtResource("1_5pexj")
 
 [node name="Body" type="Sprite2D" parent="."]
@@ -22,3 +23,6 @@ offset = Vector2(16, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v3hoh")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(15, 0)

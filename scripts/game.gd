@@ -12,7 +12,7 @@ const SHAKE_SPEED: float = 30.0
 const SHAKE_STRENGTH: float = 8.25
 const SHAKE_DECAY_RATE: float = 10
 
-var _game_started: bool = false
+var _game_started: bool = true
 var _game_paused: bool:
 	set(new_value):
 		_game_paused = new_value
@@ -32,6 +32,7 @@ var _shake_strength: float = 0.0:
 
 @onready var camera: Camera2D = %Camera
 @onready var pause: Control = %Pause
+@onready var crosshair: Crosshair = %Crosshair
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
 
@@ -43,6 +44,7 @@ func _ready() -> void:
 	_game_paused = true
 	
 	_resize_screen(_current_mode)
+	crosshair.randomise_rotation()
 
 
 func _process(delta: float) -> void:
@@ -75,11 +77,11 @@ func _handle_pause_state() -> void:
 	if _game_paused:
 		pause.show()
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
-		#crosshair.hide()
+		crosshair.hide()
 	else:
 		pause.hide()
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
-		#crosshair.show()
+		crosshair.show()
 
 
 func _resize_screen(mode: int) -> void:

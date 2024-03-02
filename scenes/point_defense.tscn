@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmt6wrbs50cbi"]
+
+[ext_resource type="PackedScene" uid="uid://du22yoe4mfflm" path="res://scenes/gun.tscn" id="1_x3eis"]
+
+[node name="PointDefense" type="Node2D"]
+
+[node name="Gun1" parent="." instance=ExtResource("1_x3eis")]
+position = Vector2(32, 166)
+
+[node name="Gun2" parent="." instance=ExtResource("1_x3eis")]
+position = Vector2(288, 166)

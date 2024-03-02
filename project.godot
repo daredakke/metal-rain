@@ -22,6 +22,14 @@ window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "blue",
+"res://scenes/": "yellow",
+"res://scripts/": "red"
+}
+
 [input]
 
 test_shake={

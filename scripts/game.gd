@@ -56,9 +56,12 @@ func _process(delta: float) -> void:
 
 func _resize_screen(mode: int) -> void:
 	match mode:
-		0, 1:
+		0:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			ProjectSettings.set_setting("display/window/size/borderless", false)
+			get_window().size = _resolutions[mode]
+			get_window().move_to_center()
+		1:
 			get_window().size = _resolutions[mode]
 			get_window().move_to_center()
 		2:

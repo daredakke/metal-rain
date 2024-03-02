@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://u7gxkwcxwqut"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://u7gxkwcxwqut"]
 
 [ext_resource type="FontFile" uid="uid://duoaun31c2glr" path="res://assets/fonts/RubikMonoOne-Regular.ttf" id="1_kxgdc"]
 
@@ -17,6 +17,9 @@ corner_detail = 4
 bg_color = Color(0.854902, 0.0823529, 0.0823529, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjot1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1syah"]
+bg_color = Color(0, 0, 0, 1)
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
@@ -39,3 +42,4 @@ Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_kxgdc")
 Label/styles/normal = SubResource("StyleBoxEmpty_sjot1")
+Panel/styles/panel = SubResource("StyleBoxFlat_1syah")

@@ -12,7 +12,7 @@ const SHAKE_SPEED: float = 30.0
 const SHAKE_STRENGTH: float = 8.25
 const SHAKE_DECAY_RATE: float = 10
 
-
+var _game_started: bool = false
 var _game_paused: bool:
 	set(new_value):
 		_game_paused = new_value
@@ -46,6 +46,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not _game_started:
+		return
+		
+	if Input.is_action_just_pressed("pause"):
+		_game_paused = !_game_paused
+		
 	if Input.is_action_just_pressed("test_shake"):
 		_shake_screen(SHAKE_STRENGTH, SHAKE_SPEED)
 	
@@ -56,6 +62,9 @@ func _process(delta: float) -> void:
 			_current_mode = 0
 		
 		_resize_screen(_current_mode)
+	
+	if _game_paused:
+		return
 	
 	camera.offset = _screen_shake_decay(delta, SHAKE_DECAY_RATE)
 

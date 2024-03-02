@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://du22yoe4mfflm"]
+
+[ext_resource type="Script" path="res://scripts/gun.gd" id="1_5pexj"]
+[ext_resource type="Texture2D" uid="uid://cxhq1yxlrbhf3" path="res://assets/circle-white.png" id="1_cgclj"]
+[ext_resource type="Texture2D" uid="uid://c50yy162sjepq" path="res://assets/square-white-32.png" id="2_6v1v8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v3hoh"]
+radius = 11.0
+
+[node name="Gun" type="Area2D"]
+script = ExtResource("1_5pexj")
+
+[node name="Body" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_cgclj")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, -9.53674e-07)
+scale = Vector2(0.59375, 0.09375)
+texture = ExtResource("2_6v1v8")
+offset = Vector2(16, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v3hoh")

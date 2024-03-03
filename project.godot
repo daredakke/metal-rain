@@ -10,9 +10,11 @@ config_version=5
 
 [application]
 
-config/name="metal-rain"
+config/name="point-defence"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/use_filter=false
 
 [autoload]
 
@@ -23,6 +25,8 @@ Global="*res://scripts/autoloads/global.gd"
 window/size/viewport_width=320
 window/size/viewport_height=180
 window/size/resizable=false
+window/size/window_width_override=640
+window/size/window_height_override=360
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 

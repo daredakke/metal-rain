@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmxxklak7iscb"]
+[gd_scene load_steps=4 format=3 uid="uid://bmxxklak7iscb"]
 
 [ext_resource type="Theme" uid="uid://u7gxkwcxwqut" path="res://resources/custom.tres" id="1_1t543"]
+[ext_resource type="Script" path="res://scripts/pause.gd" id="2_eyufv"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_n8gan"]
 
 [node name="Pause" type="Control"]
 layout_mode = 3
@@ -11,8 +14,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("1_1t543")
+script = ExtResource("2_eyufv")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="PausePanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="PauseMargin" type="MarginContainer" parent="PausePanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,38 +38,181 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="TitleLabel" type="Label" parent="Margin"]
+[node name="TitleLabel" type="Label" parent="PausePanel/PauseMargin"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 20
 text = "POINT DEFENSE"
 
-[node name="ButtonsVBox" type="VBoxContainer" parent="Margin"]
+[node name="ButtonsVBox" type="VBoxContainer" parent="PausePanel/PauseMargin"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="ContinueButton" type="Button" parent="Margin/ButtonsVBox"]
+[node name="ContinueButton" type="Button" parent="PausePanel/PauseMargin/ButtonsVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "CONTINUE"
 
-[node name="NewGameButton" type="Button" parent="Margin/ButtonsVBox"]
+[node name="NewGameButton" type="Button" parent="PausePanel/PauseMargin/ButtonsVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "NEW GAME"
 
-[node name="SettingsButton" type="Button" parent="Margin/ButtonsVBox"]
+[node name="SettingsButton" type="Button" parent="PausePanel/PauseMargin/ButtonsVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "SETTINGS"
 
-[node name="QuitButton" type="Button" parent="Margin/ButtonsVBox"]
+[node name="QuitButton" type="Button" parent="PausePanel/PauseMargin/ButtonsVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 text = "QUIT"
+
+[node name="SettingsPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsMargin" type="MarginContainer" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="SettingsLabel" type="Label" parent="SettingsPanel/SettingsMargin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 15
+text = "SETTINGS"
+
+[node name="SettingsVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="VolumeHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="MusicVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+
+[node name="MusicLabelHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/MusicVBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/MusicVBox/MusicLabelHBox"]
+layout_mode = 2
+text = "MUSIC"
+
+[node name="MusicValueLabel" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/MusicVBox/MusicLabelHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100%"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/MusicVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+
+[node name="SFXLabelHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/SFXVBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="SFXLabel" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/SFXVBox/SFXLabelHBox"]
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXValueLabel" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/SFXVBox/SFXLabelHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100%"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/SFXVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="ResolutionVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox"]
+layout_mode = 2
+
+[node name="ResolutionLabel" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/ResolutionVBox"]
+layout_mode = 2
+text = "WINDOW SCALE"
+
+[node name="ResolutionHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/ResolutionVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OneXCheckBox" type="CheckBox" parent="SettingsPanel/SettingsMargin/SettingsVBox/ResolutionVBox/ResolutionHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_n8gan")
+text = "1x"
+
+[node name="TwoXCheckBox" type="CheckBox" parent="SettingsPanel/SettingsMargin/SettingsVBox/ResolutionVBox/ResolutionHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+button_group = SubResource("ButtonGroup_n8gan")
+text = "2x"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="SettingsPanel/SettingsMargin/SettingsVBox/ResolutionVBox/ResolutionHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+button_group = SubResource("ButtonGroup_n8gan")
+text = "Fullscreen"
+
+[node name="SettingsCloseButton" type="Button" parent="SettingsPanel/SettingsMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "CLOSE"

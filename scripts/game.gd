@@ -38,6 +38,10 @@ var _shake_strength: float = 0.0:
 
 
 func _ready() -> void:
+	pause.game_exited.connect(_quit_game)
+	pause.volume_changed.connect(_change_volume)
+	pause.resolution_changed.connect(_resize_screen)
+	
 	rand.randomize()
 	noise.seed = randi()
 	noise.frequency = 0.5
@@ -56,14 +60,6 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("test_shake"):
 		_shake_screen(SHAKE_STRENGTH, SHAKE_SPEED)
-	
-	if Input.is_action_just_pressed("test_resize"):
-		_current_mode += 1
-		
-		if _current_mode >= Mode.size():
-			_current_mode = 0
-		
-		_resize_screen(_current_mode)
 	
 	if _game_paused:
 		return
@@ -86,16 +82,19 @@ func _handle_pause_state() -> void:
 
 func _resize_screen(mode: int) -> void:
 	match mode:
-		0:
+		Mode.WINDOW_ONE, Mode.WINDOW_TWO:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			ProjectSettings.set_setting("display/window/size/borderless", false)
 			get_window().size = _resolutions[mode]
 			get_window().move_to_center()
-		1:
-			get_window().size = _resolutions[mode]
-			get_window().move_to_center()
-		2:
+		
+		Mode.FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+
+
+func _change_volume(bus_index: int, value: float) -> void:
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+	AudioServer.set_bus_mute(bus_index, value < 0.05)
 
 
 func _shake_screen(strength: float, speed: float) -> void:
@@ -111,3 +110,8 @@ func _screen_shake_decay(delta: float, decay_rate: float) -> Vector2:
 		noise.get_noise_2d(1, _noise_i) * _shake_strength,
 		noise.get_noise_2d(100, _noise_i) * _shake_strength
 	)
+
+
+func _quit_game() -> void:
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	get_tree().quit()

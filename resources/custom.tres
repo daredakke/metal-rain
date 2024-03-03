@@ -1,8 +1,12 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://u7gxkwcxwqut"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://u7gxkwcxwqut"]
 
 [ext_resource type="FontFile" uid="uid://duoaun31c2glr" path="res://assets/fonts/RubikMonoOne-Regular.ttf" id="1_kxgdc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ko40d"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
 bg_color = Color(1, 0.160784, 0.160784, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vnalr"]
@@ -14,7 +18,46 @@ bg_color = Color(1, 1, 1, 1)
 corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bemi"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
 bg_color = Color(0.854902, 0.0823529, 0.0823529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jidp"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.854902, 0.0823529, 0.0823529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1knbj"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.160784, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryqfg"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.160784, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1kpj"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.854902, 0.0823529, 0.0823529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ws472"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.160784, 0.160784, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjot1"]
 
@@ -31,6 +74,14 @@ Button/fonts/font = ExtResource("1_kxgdc")
 Button/styles/hover = SubResource("StyleBoxFlat_ko40d")
 Button/styles/normal = SubResource("StyleBoxFlat_vnalr")
 Button/styles/pressed = SubResource("StyleBoxFlat_0bemi")
+CheckBox/colors/font_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_hover_color = Color(0, 0, 0, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+CheckBox/styles/focus = SubResource("StyleBoxFlat_2jidp")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_1knbj")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_ryqfg")
+CheckBox/styles/pressed = SubResource("StyleBoxFlat_u1kpj")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_ws472")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0)
@@ -39,7 +90,7 @@ Label/constants/outline_size = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 1
-Label/font_sizes/font_size = 16
+Label/font_sizes/font_size = 10
 Label/fonts/font = ExtResource("1_kxgdc")
 Label/styles/normal = SubResource("StyleBoxEmpty_sjot1")
 Panel/styles/panel = SubResource("StyleBoxFlat_1syah")

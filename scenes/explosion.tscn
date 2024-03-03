@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://x2u65e5fvveq"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_4ordq"]
+[ext_resource type="Texture2D" uid="uid://cxhq1yxlrbhf3" path="res://assets/circle-white.png" id="1_bhohn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lb0gf"]
+radius = 75.7576
+
+[sub_resource type="Animation" id="Animation_n3xlv"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1.8025, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o5blk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmok7"]
+_data = {
+"RESET": SubResource("Animation_o5blk"),
+"fade_out": SubResource("Animation_n3xlv")
+}
+
+[node name="Explosion" type="Area2D" groups=["explosion"]]
+process_mode = 1
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_4ordq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+scale = Vector2(1, 1)
+texture = ExtResource("1_bhohn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lb0gf")
+
+[node name="DamageDuration" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kmok7")
+}
+
+[connection signal="timeout" from="DamageDuration" to="." method="_on_damage_duration_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

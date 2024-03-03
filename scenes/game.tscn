@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
 [ext_resource type="Texture2D" uid="uid://c50yy162sjepq" path="res://assets/square-white-32.png" id="2_c34ma"]
 [ext_resource type="PackedScene" uid="uid://bmxxklak7iscb" path="res://scenes/pause.tscn" id="2_pkmcc"]
-[ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defense.tscn" id="5_v02w3"]
+[ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defence.tscn" id="5_v02w3"]
 [ext_resource type="Script" path="res://scripts/crosshair.gd" id="6_3pc0k"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
 
@@ -38,7 +38,7 @@ scale = Vector2(11, 6.5)
 texture = ExtResource("2_c34ma")
 centered = false
 
-[node name="PointDefense" parent="." instance=ExtResource("5_v02w3")]
+[node name="PointDefence" parent="." instance=ExtResource("5_v02w3")]
 unique_name_in_owner = true
 process_mode = 1
 z_index = 10

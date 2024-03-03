@@ -15,7 +15,7 @@ var _shake_strength: float = 0.0:
 
 @onready var camera: Camera2D = %Camera
 @onready var pause: Control = %Pause
-@onready var point_defense: PointDefense = %PointDefense
+@onready var point_defence: PointDefence = %PointDefence
 @onready var crosshair: Crosshair = %Crosshair
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
@@ -27,7 +27,7 @@ func _ready() -> void:
 	pause.game_continued.connect(_unpause_game)
 	pause.volume_changed.connect(_change_volume)
 	pause.resolution_changed.connect(_resize_screen)
-	point_defense.gun_fired.connect(_shake_screen)
+	point_defence.gun_fired.connect(_shake_screen)
 	
 	_resize_screen(_current_mode)
 	rand.randomize()
@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 func _start_new_game() -> void:
 	Global.game_started = true
 	
-	point_defense.reset()
+	point_defence.reset()
 	_unpause_game()
 
 

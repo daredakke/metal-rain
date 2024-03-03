@@ -1,4 +1,4 @@
-class_name PointDefense
+class_name PointDefence
 extends Node2D
 
 

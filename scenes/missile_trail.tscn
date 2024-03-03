@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ubgnrfrutceh"]
+
+[ext_resource type="Script" path="res://scripts/missile_trail.gd" id="1_2mrw8"]
+
+[node name="MissileTrail" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+script = ExtResource("1_2mrw8")

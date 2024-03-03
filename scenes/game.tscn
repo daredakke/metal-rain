@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=10 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defence.tscn" id="5_v02w3"]
 [ext_resource type="Script" path="res://scripts/crosshair.gd" id="6_3pc0k"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
+[ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpfdq"]
+size = Vector2(1150, 27)
 
 [node name="Game" type="Node2D"]
 process_mode = 3
@@ -43,19 +47,25 @@ unique_name_in_owner = true
 process_mode = 1
 z_index = 10
 
-[node name="Ground" type="Sprite2D" parent="."]
-position = Vector2(160, 182)
-scale = Vector2(11, 1)
+[node name="Ground" type="Area2D" parent="." groups=["ground"]]
+z_index = 20
+position = Vector2(160, 178)
+
+[node name="GroundSprite" type="Sprite2D" parent="Ground"]
+self_modulate = Color(1, 0.160784, 0.160784, 1)
+position = Vector2(0, 2)
+scale = Vector2(11, 0.875)
 texture = ExtResource("2_c34ma")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_wpfdq")
+
+[node name="MissileSpawner" parent="." instance=ExtResource("6_y6ruk")]
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+z_index = 50
 scale = Vector2(0.67, 0.67)
 texture = ExtResource("6_qkol0")
 script = ExtResource("6_3pc0k")
-
-[node name="BulletKillPlane" type="Area2D" parent="." groups=["bullet_kill_plane"]]
-input_pickable = false
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletKillPlane"]
-polygon = PackedVector2Array(-82, 198, -82, -100, 403, -100, 403, 201, 470, 201, 470, -190, -146, -190, -146, 198)

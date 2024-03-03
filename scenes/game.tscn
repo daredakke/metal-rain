@@ -62,6 +62,7 @@ position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_wpfdq")
 
 [node name="MissileSpawner" parent="." instance=ExtResource("6_y6ruk")]
+process_mode = 1
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 unique_name_in_owner = true

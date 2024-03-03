@@ -2,8 +2,10 @@ class_name MissileSpawner
 extends Node2D
 
 
-const MISSILE_SCENE = preload("res://scenes/missile.tscn")
-const MISSILE_TRAIL_SCENE = preload("res://scenes/missile_trail.tscn")
+const MAX_SPAWN_X: int = 320
+const SPREAD: float = -15.0
+const MISSILE_SCENE: PackedScene = preload("res://scenes/missile.tscn")
+const MISSILE_TRAIL_SCENE: PackedScene = preload("res://scenes/missile_trail.tscn")
 
 @onready var spawn_delay: Timer = %SpawnDelay
 
@@ -23,7 +25,7 @@ func stop() -> void:
 func _spawn_missile() -> void:
 	var missile := MISSILE_SCENE.instantiate() as Missile
 	missile.global_position = _spawn_point()
-	missile.direction = _spawn_direction()
+	missile.direction = _spawn_direction(missile.global_position.x)
 	
 	add_sibling(missile)
 	
@@ -37,11 +39,18 @@ func _spawn_missile() -> void:
 
 
 func _spawn_point() -> Vector2i:
-	var x_pos := randi_range(50, get_viewport().size.x - 50)
-	var y_pos := randi_range(-80, -20)
+	var x_pos := randi_range(0, MAX_SPAWN_X)
+	var y_pos := randi_range(-50, -10)
 	
 	return Vector2i(x_pos, y_pos)
 
 
-func _spawn_direction() -> Vector2:
-	return Vector2.DOWN.rotated(deg_to_rad(randf_range(-30, 30)))
+func _spawn_direction(x_pos: float) -> Vector2:
+	# Direction bias based on missile x position
+	var rand_angle := randf_range(-SPREAD, SPREAD) + floorf(x_pos * 0.1 + -16.0)
+	
+	return Vector2.DOWN.rotated(deg_to_rad(rand_angle))
+
+
+func _on_timer_timeout() -> void:
+	stop()

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/missile_trail.gd" id="1_2mrw8"]
 
 [node name="MissileTrail" type="Line2D"]
+process_mode = 1
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
 script = ExtResource("1_2mrw8")

@@ -13,4 +13,5 @@ script = ExtResource("1_blaon")
 texture = ExtResource("2_k4ntx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+process_mode = 1
 shape = SubResource("CircleShape2D_0qwh3")

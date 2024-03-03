@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=11 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
 [ext_resource type="Texture2D" uid="uid://c50yy162sjepq" path="res://assets/square-white-32.png" id="2_c34ma"]
 [ext_resource type="PackedScene" uid="uid://bmxxklak7iscb" path="res://scenes/pause.tscn" id="2_pkmcc"]
+[ext_resource type="Texture2D" uid="uid://ww6puhk2ehsr" path="res://assets/screen-vignette-320x180.png" id="4_klfyp"]
 [ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defence.tscn" id="5_v02w3"]
 [ext_resource type="Script" path="res://scripts/crosshair.gd" id="6_3pc0k"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
@@ -35,6 +36,11 @@ self_modulate = Color(1, 1, 1, 0.0980392)
 texture = ExtResource("2_11fqy")
 centered = false
 
+[node name="Vignette" type="Sprite2D" parent="Camera/ScanlineCanvas"]
+self_modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource("4_klfyp")
+centered = false
+
 [node name="Sky" type="Sprite2D" parent="."]
 self_modulate = Color(0.0313726, 0.0313726, 0.0313726, 1)
 position = Vector2(-16, -14)
@@ -62,7 +68,6 @@ position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_wpfdq")
 
 [node name="MissileSpawner" parent="." instance=ExtResource("6_y6ruk")]
-process_mode = 1
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 unique_name_in_owner = true

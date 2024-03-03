@@ -4,7 +4,7 @@ extends Area2D
 
 signal missile_destroyed
 
-var speed: float = 18
+var speed: float = 15
 var direction: Vector2
 
 

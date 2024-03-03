@@ -39,6 +39,8 @@ texture = ExtResource("2_c34ma")
 centered = false
 
 [node name="PointDefense" parent="." instance=ExtResource("5_v02w3")]
+unique_name_in_owner = true
+process_mode = 1
 z_index = 10
 
 [node name="Ground" type="Sprite2D" parent="."]
@@ -51,3 +53,9 @@ unique_name_in_owner = true
 scale = Vector2(0.67, 0.67)
 texture = ExtResource("6_qkol0")
 script = ExtResource("6_3pc0k")
+
+[node name="BulletKillPlane" type="Area2D" parent="." groups=["bullet_kill_plane"]]
+input_pickable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletKillPlane"]
+polygon = PackedVector2Array(-82, 198, -82, -100, 403, -100, 403, 201, 470, 201, 470, -190, -146, -190, -146, 198)

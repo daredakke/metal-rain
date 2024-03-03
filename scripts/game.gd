@@ -2,8 +2,6 @@ class_name Game
 extends Node2D
 
 
-const SHAKE_SPEED: float = 30.0
-const SHAKE_STRENGTH: float = 8.25
 const SHAKE_DECAY_RATE: float = 10
 
 var _current_mode: int = Global.Mode.WINDOW_ONE
@@ -17,6 +15,7 @@ var _shake_strength: float = 0.0:
 
 @onready var camera: Camera2D = %Camera
 @onready var pause: Control = %Pause
+@onready var point_defense: PointDefense = %PointDefense
 @onready var crosshair: Crosshair = %Crosshair
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
@@ -28,13 +27,13 @@ func _ready() -> void:
 	pause.game_continued.connect(_unpause_game)
 	pause.volume_changed.connect(_change_volume)
 	pause.resolution_changed.connect(_resize_screen)
+	point_defense.gun_fired.connect(_shake_screen)
 	
+	_resize_screen(_current_mode)
 	rand.randomize()
 	noise.seed = randi()
 	noise.frequency = 0.5
 	_pause_game()
-	
-	_resize_screen(_current_mode)
 	crosshair.randomise_rotation()
 
 
@@ -44,9 +43,6 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("pause") and not Global.game_paused:
 		_pause_game()
-		
-	if Input.is_action_just_pressed("test_shake"):
-		_shake_screen(SHAKE_STRENGTH, SHAKE_SPEED)
 	
 	# Don't process camera shake if game paused
 	if Global.game_paused:
@@ -58,7 +54,12 @@ func _process(delta: float) -> void:
 func _start_new_game() -> void:
 	Global.game_started = true
 	
+	point_defense.reset()
 	_unpause_game()
+
+
+func _reset_game_state() -> void:
+	pass
 
 
 func _pause_game() -> void:

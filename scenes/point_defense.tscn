@@ -1,11 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmt6wrbs50cbi"]
+[gd_scene load_steps=3 format=3 uid="uid://bmt6wrbs50cbi"]
 
+[ext_resource type="Script" path="res://scripts/point_defense.gd" id="1_ldugu"]
 [ext_resource type="PackedScene" uid="uid://du22yoe4mfflm" path="res://scenes/gun.tscn" id="1_x3eis"]
 
 [node name="PointDefense" type="Node2D"]
+script = ExtResource("1_ldugu")
 
 [node name="Gun1" parent="." instance=ExtResource("1_x3eis")]
+unique_name_in_owner = true
 position = Vector2(32, 166)
 
 [node name="Gun2" parent="." instance=ExtResource("1_x3eis")]
+unique_name_in_owner = true
 position = Vector2(288, 166)
+
+[node name="ReloadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true

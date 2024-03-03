@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgjn36n51srkc"]
+
+[ext_resource type="Script" path="res://scripts/player_bullet.gd" id="1_blaon"]
+[ext_resource type="Texture2D" uid="uid://bl7h3ummya8vj" path="res://assets/circle-white-13.png" id="1_ok3tj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0qwh3"]
+radius = 8.0
+
+[node name="PlayerBullet" type="Area2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_blaon")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ok3tj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0qwh3")

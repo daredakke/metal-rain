@@ -52,10 +52,11 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		if settings_panel.visible:
 			settings_panel.hide()
-		else:
-			if Global.game_started:
-				_delay_process = true
-				game_continued.emit()
+			return
+			
+		if Global.game_started:
+			_delay_process = true
+			game_continued.emit()
 
 
 func _on_new_game_button_pressed() -> void:
@@ -94,15 +95,15 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 
 func _on_one_x_check_box_pressed() -> void:
-	_resolution_changed(0)
+	_resolution_changed(Global.Mode.WINDOW_ONE)
 
 
 func _on_two_x_check_box_pressed() -> void:
-	_resolution_changed(1)
+	_resolution_changed(Global.Mode.WINDOW_TWO)
 
 
 func _on_fullscreen_check_box_pressed() -> void:
-	_resolution_changed(2)
+	_resolution_changed(Global.Mode.FULLSCREEN)
 
 
 func _resolution_changed(mode: int) -> void:

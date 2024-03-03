@@ -23,6 +23,3 @@ offset = Vector2(16, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v3hoh")
-
-[node name="BulletSpawn" type="Marker2D" parent="."]
-position = Vector2(15, 0)

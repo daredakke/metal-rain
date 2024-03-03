@@ -23,3 +23,10 @@ offset = Vector2(16, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v3hoh")
+
+[node name="ReadyIndicator" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 0.00784314, 0.00784314, 1)
+position = Vector2(0, -5)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_cgclj")

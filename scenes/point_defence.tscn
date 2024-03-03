@@ -18,3 +18,5 @@ position = Vector2(288, 166)
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

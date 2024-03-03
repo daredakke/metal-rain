@@ -39,3 +39,18 @@ func reset() -> void:
 			node.queue_free()
 	
 	reload_timer.start()
+
+
+func _on_reload_timer_timeout() -> void:
+	if _shots_fired >= MAX_SHOTS:
+		return
+	
+	var ready_to_fire: int = 0
+	
+	for gun in guns:
+		if gun.ready_indicator.visible:
+			ready_to_fire += 1
+	
+	if ready_to_fire == 0:
+		var gun_index: int = _shots_fired % 2
+		guns[gun_index].ready_indicator.visible = true

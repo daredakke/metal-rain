@@ -3,6 +3,7 @@ extends Area2D
 
 
 @onready var barrel: Sprite2D = $Barrel
+@onready var ready_indicator: Sprite2D = $ReadyIndicator
 
 
 func _process(_delta: float) -> void:
@@ -17,3 +18,5 @@ func fire_bullet(bullet_scene: PackedScene) -> void:
 	bullet.distance_to_travel = global_position.distance_to(get_global_mouse_position())
 	
 	add_sibling(bullet)
+	
+	ready_indicator.hide()

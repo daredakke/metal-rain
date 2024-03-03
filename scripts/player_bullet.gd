@@ -2,7 +2,7 @@ class_name PlayerBullet
 extends Area2D
 
 
-var speed: float = 150
+var speed: float = 167
 var direction: Vector2
 var distance_to_travel: float
 

@@ -7,11 +7,22 @@ const SPREAD: float = -15.0
 const MISSILE_SCENE: PackedScene = preload("res://scenes/missile.tscn")
 const MISSILE_TRAIL_SCENE: PackedScene = preload("res://scenes/missile_trail.tscn")
 
+var salvo_size: int = 10:
+	set(value):
+		salvo_size = clampi(value, 1, 99)
+
+var _missiles_fired: int = 0
+
 @onready var spawn_delay: Timer = %SpawnDelay
 
 
 func _ready() -> void:
 	spawn_delay.timeout.connect(_spawn_missile)
+
+
+func _process(_delta: float) -> void:
+	if _missiles_fired >= salvo_size:
+		stop()
 
 
 func start() -> void:
@@ -28,6 +39,8 @@ func _spawn_missile() -> void:
 	missile.direction = _spawn_direction(missile.global_position.x)
 	
 	add_sibling(missile)
+	
+	_missiles_fired += 1
 	
 	var missile_trail := MISSILE_TRAIL_SCENE.instantiate() as MissileTrail
 	missile_trail.node_to_follow = missile
@@ -50,7 +63,3 @@ func _spawn_direction(x_pos: float) -> Vector2:
 	var rand_angle := randf_range(-SPREAD, SPREAD) + floorf(x_pos * 0.1 + -16.0)
 	
 	return Vector2.DOWN.rotated(deg_to_rad(rand_angle))
-
-
-func _on_timer_timeout() -> void:
-	stop()

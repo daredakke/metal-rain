@@ -8,6 +8,7 @@ signal game_exited
 signal volume_changed(bus_index: int, value: float)
 signal resolution_changed(mode: int)
 
+var _delay_process: bool = true
 var _music_bus: int = AudioServer.get_bus_index("Music")
 var _sfx_bus: int = AudioServer.get_bus_index("SFX")
 
@@ -27,6 +28,8 @@ var _sfx_bus: int = AudioServer.get_bus_index("SFX")
 
 
 func _ready() -> void:
+	new_game_button.pressed.connect(_on_new_game_button_pressed)
+	continue_button.pressed.connect(_on_continue_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	settings_button.pressed.connect(_on_settings_button_pressed)
 	settings_close_button.pressed.connect(_on_settings_close_button_pressed)
@@ -36,15 +39,33 @@ func _ready() -> void:
 	two_x_check_box.pressed.connect(_on_two_x_check_box_pressed)
 	fullscreen_check_box.pressed.connect(_on_fullscreen_check_box_pressed)
 	
+	continue_button.hide()
 	settings_panel.hide()
+
+
+func _process(_delta: float) -> void:
+	# Ensure pause menu doesn't immediately unpause when pause button pressed
+	if _delay_process:
+		_delay_process = false
+		return
+	
+	if Input.is_action_just_pressed("pause"):
+		if settings_panel.visible:
+			settings_panel.hide()
+		else:
+			if Global.game_started:
+				_delay_process = true
+				game_continued.emit()
 
 
 func _on_new_game_button_pressed() -> void:
 	continue_button.show()
+	_delay_process = true
 	new_game_started.emit()
 
 
 func _on_continue_button_pressed() -> void:
+	_delay_process = true
 	game_continued.emit()
 
 

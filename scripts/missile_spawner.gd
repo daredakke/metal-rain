@@ -7,6 +7,7 @@ const SPREAD: float = -15.0
 const MISSILE_SCENE: PackedScene = preload("res://scenes/missile.tscn")
 const MISSILE_TRAIL_SCENE: PackedScene = preload("res://scenes/missile_trail.tscn")
 
+var mirv_chance: float = 0.1
 var salvo_size: int = 10:
 	set(value):
 		salvo_size = clampi(value, 1, 99)
@@ -37,6 +38,7 @@ func _spawn_missile() -> void:
 	var missile := MISSILE_SCENE.instantiate() as Missile
 	missile.global_position = _spawn_point()
 	missile.direction = _spawn_direction(missile.global_position.x)
+	missile.is_mirv = randf() < mirv_chance
 	
 	add_sibling(missile)
 	
@@ -45,7 +47,6 @@ func _spawn_missile() -> void:
 	var missile_trail := MISSILE_TRAIL_SCENE.instantiate() as MissileTrail
 	missile_trail.node_to_follow = missile
 	missile_trail.set_anchor(missile.global_position)
-	
 	missile.missile_destroyed.connect(missile_trail.destroy)
 	
 	add_sibling(missile_trail)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=15 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/crosshair.gd" id="6_3pc0k"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
 [ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
+[ext_resource type="Texture2D" uid="uid://bqgaho3ipoijj" path="res://assets/hills.png" id="7_vebe0"]
 [ext_resource type="PackedScene" uid="uid://btxpimh14sowk" path="res://scenes/city.tscn" id="10_2a1qj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gyko"]
@@ -47,9 +48,9 @@ self_modulate = Color(1, 1, 1, 0.431373)
 texture = ExtResource("4_klfyp")
 centered = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+[node name="FilmGrainCanvas" type="CanvasLayer" parent="Camera"]
 
-[node name="ColorRect" type="ColorRect" parent="Camera/CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="Camera/FilmGrainCanvas"]
 material = SubResource("ShaderMaterial_0gyko")
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,6 +65,11 @@ position = Vector2(-16, -14)
 scale = Vector2(11, 6.5)
 texture = ExtResource("2_c34ma")
 centered = false
+
+[node name="Hills" type="Sprite2D" parent="."]
+self_modulate = Color(0.45098, 0.0705882, 0.0705882, 1)
+position = Vector2(144, 126)
+texture = ExtResource("7_vebe0")
 
 [node name="PointDefence" parent="." instance=ExtResource("5_v02w3")]
 unique_name_in_owner = true

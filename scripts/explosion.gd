@@ -2,6 +2,8 @@ class_name Explosion
 extends Area2D
 
 
+var is_friendly: bool = false
+
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var damage_duration: Timer = $DamageDuration
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

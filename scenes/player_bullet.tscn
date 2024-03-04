@@ -12,6 +12,8 @@ script = ExtResource("1_blaon")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_k4ntx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player_bullet"]]
 process_mode = 1
 shape = SubResource("CircleShape2D_0qwh3")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

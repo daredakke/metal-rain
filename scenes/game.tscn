@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=12 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
 [ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
 [ext_resource type="PackedScene" uid="uid://btxpimh14sowk" path="res://scenes/city.tscn" id="10_2a1qj"]
-[ext_resource type="PackedScene" uid="uid://x2u65e5fvveq" path="res://scenes/explosion.tscn" id="11_uxayg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpfdq"]
 size = Vector2(1150, 27)
@@ -98,6 +97,3 @@ position = Vector2(210, 155)
 
 [node name="City6" parent="Cities" instance=ExtResource("10_2a1qj")]
 position = Vector2(240, 155)
-
-[node name="Explosion" parent="." instance=ExtResource("11_uxayg")]
-position = Vector2(123, 64)

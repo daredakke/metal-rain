@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://btxpimh14sowk"]
+[gd_scene load_steps=4 format=3 uid="uid://btxpimh14sowk"]
 
+[ext_resource type="Script" path="res://scripts/city.gd" id="1_dpdj2"]
 [ext_resource type="Texture2D" uid="uid://msd2wsmvslsx" path="res://assets/city.png" id="1_uvq6u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivenc"]
@@ -7,6 +8,7 @@ size = Vector2(32, 22)
 
 [node name="City" type="Area2D"]
 scale = Vector2(0.67, 0.67)
+script = ExtResource("1_dpdj2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_uvq6u")
@@ -14,3 +16,5 @@ texture = ExtResource("1_uvq6u")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_ivenc")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

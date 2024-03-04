@@ -2,6 +2,19 @@ class_name Gun
 extends Area2D
 
 
+signal gun_destroyed
+
+const MAX_HP: int = 20
+
+var _hp: int = MAX_HP:
+	set(value):
+		_hp = clampi(value, 0, MAX_HP)
+		print("GUN: " + str(_hp))
+		
+		if _hp == 0:
+			gun_destroyed.emit()
+			queue_free()
+
 @onready var barrel: Sprite2D = $Barrel
 @onready var ready_indicator: Sprite2D = $ReadyIndicator
 
@@ -20,3 +33,8 @@ func fire_bullet(bullet_scene: PackedScene) -> void:
 	add_sibling(bullet)
 	
 	ready_indicator.hide()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("explosion") and not area.is_friendly:
+		_hp -= 1

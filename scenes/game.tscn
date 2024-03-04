@@ -1,15 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=14 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
 [ext_resource type="Texture2D" uid="uid://c50yy162sjepq" path="res://assets/square-white-32.png" id="2_c34ma"]
 [ext_resource type="PackedScene" uid="uid://bmxxklak7iscb" path="res://scenes/pause.tscn" id="2_pkmcc"]
 [ext_resource type="Texture2D" uid="uid://ww6puhk2ehsr" path="res://assets/screen-vignette-320x180.png" id="4_klfyp"]
+[ext_resource type="Shader" path="res://resources/film_grain.gdshader" id="5_hlp2s"]
 [ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defence.tscn" id="5_v02w3"]
 [ext_resource type="Script" path="res://scripts/crosshair.gd" id="6_3pc0k"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
 [ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
 [ext_resource type="PackedScene" uid="uid://btxpimh14sowk" path="res://scenes/city.tscn" id="10_2a1qj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gyko"]
+shader = ExtResource("5_hlp2s")
+shader_parameter/strength = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpfdq"]
 size = Vector2(1150, 27)
@@ -38,9 +43,20 @@ texture = ExtResource("2_11fqy")
 centered = false
 
 [node name="Vignette" type="Sprite2D" parent="Camera/ScanlineCanvas"]
-self_modulate = Color(1, 1, 1, 0.392157)
+self_modulate = Color(1, 1, 1, 0.431373)
 texture = ExtResource("4_klfyp")
 centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera/CanvasLayer"]
+material = SubResource("ShaderMaterial_0gyko")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Sky" type="Sprite2D" parent="."]
 self_modulate = Color(0.0313726, 0.0313726, 0.0313726, 1)

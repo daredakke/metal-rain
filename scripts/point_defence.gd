@@ -3,13 +3,23 @@ extends Node2D
 
 
 signal gun_fired(shake_strength: float, shake_speed: float)
+signal ammo_changed(value: int)
 
-const MAX_SHOTS: int = 10
 const SHAKE_STRENGTH: float = 4.0
 const SHAKE_SPEED: float = 30.0
 const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet.tscn")
 
-var _shots_fired: int = 0
+var ammo_left: int = 5:
+	set(value):
+		ammo_left = clampi(value, 0, 39)
+		
+		ammo_changed.emit(ammo_left)
+
+var _shots_fired: int = 0:
+	set(value):
+		_shots_fired = clampi(value, 0, 39)
+		
+		ammo_changed.emit(ammo_left - _shots_fired)
 
 @onready var gun_1: Gun = %Gun1
 @onready var gun_2: Gun = %Gun2
@@ -18,7 +28,7 @@ var _shots_fired: int = 0
 
 
 func _process(_delta: float) -> void:
-	if _shots_fired >= MAX_SHOTS:
+	if _shots_fired >= ammo_left:
 		return
 	
 	if Input.is_action_just_pressed("action") and reload_timer.is_stopped():
@@ -42,7 +52,7 @@ func reset() -> void:
 
 
 func _on_reload_timer_timeout() -> void:
-	if _shots_fired >= MAX_SHOTS:
+	if _shots_fired >= ammo_left:
 		return
 	
 	var ready_to_fire: int = 0

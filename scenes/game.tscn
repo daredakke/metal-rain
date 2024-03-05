@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=16 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
 [ext_resource type="Texture2D" uid="uid://c50yy162sjepq" path="res://assets/square-white-32.png" id="2_c34ma"]
 [ext_resource type="PackedScene" uid="uid://bmxxklak7iscb" path="res://scenes/pause.tscn" id="2_pkmcc"]
+[ext_resource type="PackedScene" uid="uid://cc87yticxa4o5" path="res://scenes/hud.tscn" id="3_ftxco"]
 [ext_resource type="Texture2D" uid="uid://ww6puhk2ehsr" path="res://assets/screen-vignette-320x180.png" id="4_klfyp"]
 [ext_resource type="Shader" path="res://resources/film_grain.gdshader" id="5_hlp2s"]
 [ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defence.tscn" id="5_v02w3"]
@@ -35,6 +36,10 @@ anchor_mode = 0
 unique_name_in_owner = true
 process_mode = 2
 visible = false
+
+[node name="HUD" parent="Camera/UI" instance=ExtResource("3_ftxco")]
+unique_name_in_owner = true
+mouse_filter = 2
 
 [node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 

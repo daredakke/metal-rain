@@ -16,6 +16,7 @@ var level: int = 1
 
 @onready var camera: Camera2D = %Camera
 @onready var pause: Control = %Pause
+@onready var hud: Control = %HUD
 @onready var point_defence: PointDefence = %PointDefence
 @onready var crosshair: Crosshair = %Crosshair
 @onready var rand = RandomNumberGenerator.new()
@@ -29,6 +30,7 @@ func _ready() -> void:
 	pause.volume_changed.connect(_change_volume)
 	pause.resolution_changed.connect(_resize_screen)
 	point_defence.gun_fired.connect(_shake_screen)
+	point_defence.ammo_changed.connect(hud.display_shot_indicators)
 	
 	_resize_screen(_current_mode)
 	rand.randomize()

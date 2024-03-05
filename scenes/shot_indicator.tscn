@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2f38xrap73jg"]
+
+[ext_resource type="Texture2D" uid="uid://dtpg5h2extuo5" path="res://assets/circle-4.png" id="1_jr588"]
+
+[node name="ShotIndicator" type="TextureRect"]
+texture = ExtResource("1_jr588")

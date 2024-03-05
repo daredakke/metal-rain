@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=19 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bh8p6duapaelr" path="res://scenes/level_transition.tscn" id="5_ii8vw"]
 [ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defence.tscn" id="5_v02w3"]
 [ext_resource type="Script" path="res://scripts/crosshair.gd" id="6_3pc0k"]
+[ext_resource type="PackedScene" uid="uid://dwrq2caodhkg6" path="res://scenes/fade_out.tscn" id="6_pfn60"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
 [ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
 [ext_resource type="Texture2D" uid="uid://bqgaho3ipoijj" path="res://assets/hills.png" id="7_vebe0"]
@@ -38,21 +39,25 @@ anchor_mode = 0
 
 [node name="UI" type="CanvasLayer" parent="Camera"]
 
+[node name="HUD" parent="Camera/UI" instance=ExtResource("3_ftxco")]
+unique_name_in_owner = true
+
 [node name="Pause" parent="Camera/UI" instance=ExtResource("2_pkmcc")]
 unique_name_in_owner = true
 process_mode = 2
 visible = false
 
-[node name="HUD" parent="Camera/UI" instance=ExtResource("3_ftxco")]
-unique_name_in_owner = true
-
 [node name="LevelTransition" parent="Camera/UI" instance=ExtResource("5_ii8vw")]
 unique_name_in_owner = true
+process_mode = 1
 visible = false
 
 [node name="GameOver" parent="Camera/UI" instance=ExtResource("4_qfk3x")]
 unique_name_in_owner = true
 visible = false
+
+[node name="FadeOut" parent="Camera/UI" instance=ExtResource("6_pfn60")]
+unique_name_in_owner = true
 
 [node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 

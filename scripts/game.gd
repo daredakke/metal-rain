@@ -19,8 +19,9 @@ var _ammo_restock_amount: int = 2
 @onready var camera: Camera2D = %Camera
 @onready var pause: Control = %Pause
 @onready var hud: Control = %HUD
-@onready var game_over: GameOver = %GameOver
 @onready var level_transition: LevelTransition = %LevelTransition
+@onready var game_over: GameOver = %GameOver
+@onready var fade_out: FadeOut = %FadeOut
 @onready var point_defence: PointDefence = %PointDefence
 @onready var missile_spawner: MissileSpawner = %MissileSpawner
 @onready var crosshair: Crosshair = %Crosshair
@@ -41,7 +42,8 @@ func _ready() -> void:
 	point_defence.gun_fired.connect(_shake_screen)
 	point_defence.ammo_changed.connect(hud.display_shot_indicators)
 	missile_spawner.level_over.connect(_end_level)
-	cities.all_cities_destroyed.connect(_game_over)
+	cities.all_cities_destroyed.connect(_fade_out)
+	fade_out.fade_out_complete.connect(_game_over)
 	
 	_resize_screen(_current_mode)
 	rand.randomize()
@@ -52,7 +54,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if not Global.game_started or Global.game_over:
+	if not Global.game_started:
 		return
 		
 	if Input.is_action_just_pressed("pause") and not Global.game_paused:
@@ -69,13 +71,13 @@ func _process(delta: float) -> void:
 
 
 func _start_new_game() -> void:
+	Global.game_started = true
 	point_defence.can_fire = true
 	
 	missile_spawner.start()
 
 
 func _new_game_transition() -> void:
-	Global.game_started = true
 	_level = 1
 	
 	_unpause_game()
@@ -122,10 +124,16 @@ func _end_level() -> void:
 	level_end_delay.start()
 
 
+func _fade_out() -> void:
+	point_defence.can_fire = false
+	
+	fade_out.start()
+
+
 func _game_over() -> void:
 	# Remove any screen shake
 	camera.offset = Vector2.ZERO
-	Global.game_over = true
+	Global.game_started = false
 	
 	game_over.show()
 	pause.continue_button.hide()

@@ -5,7 +5,7 @@ extends Node2D
 signal gun_fired(shake_strength: float, shake_speed: float)
 signal ammo_changed(value: int)
 
-const STARTING_AMMO: int = 7
+const STARTING_AMMO: int = 6
 const SHAKE_STRENGTH: float = 4.0
 const SHAKE_SPEED: float = 30.0
 const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet.tscn")

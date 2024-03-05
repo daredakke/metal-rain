@@ -61,6 +61,7 @@ func _split() -> void:
 	for i in mirv_salvo:
 		var missile := MISSILE_SCENE.instantiate() as Missile
 		missile.global_position = global_position
+		missile.speed = speed
 		missile.direction = direction.rotated(deg_to_rad((i * 10) - mirv_salvo * 0.5))
 		
 		add_sibling(missile)

@@ -8,8 +8,8 @@ const MAX_SPAWN_X: int = 320
 const SPREAD: float = -15.0
 const INIT_MIRV_CHANCE: float = 0.05
 const INIT_SALVO_SIZE: int = 3
-const INIT_MISSILE_SPEED: float = 13.0
-const INIT_SPAWN_DELAY: float = 1.9
+const INIT_MISSILE_SPEED: float = 15.0
+const INIT_SPAWN_DELAY: float = 2.0
 const MISSILE_SCENE: PackedScene = preload("res://scenes/missile.tscn")
 const MISSILE_TRAIL_SCENE: PackedScene = preload("res://scenes/missile_trail.tscn")
 

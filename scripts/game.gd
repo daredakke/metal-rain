@@ -40,9 +40,13 @@ func _ready() -> void:
 	level_transition.initial_transition_finished.connect(_start_new_game)
 	level_transition.level_transitioned.connect(_next_level)
 	point_defence.gun_fired.connect(_shake_screen)
+	point_defence.gun_damaged.connect(_shake_screen)
+	point_defence.gun_destroyed.connect(_shake_screen)
 	point_defence.ammo_changed.connect(hud.display_shot_indicators)
 	missile_spawner.level_over.connect(_end_level)
 	cities.all_cities_destroyed.connect(_fade_out)
+	cities.city_damaged.connect(_shake_screen)
+	cities.city_destroyed.connect(_shake_screen)
 	fade_out.fade_out_complete.connect(_game_over)
 	
 	_resize_screen(_current_mode)
@@ -114,7 +118,7 @@ func _next_level() -> void:
 	missile_spawner.mirv_chance += 0.01
 	missile_spawner.salvo_size += 1
 	missile_spawner.missile_speed += 1.0
-	missile_spawner.spawn_delay -= 0.008
+	missile_spawner.spawn_delay -= 0.01
 	missile_spawner.start()
 
 

@@ -41,7 +41,7 @@ theme_override_constants/margin_bottom = 16
 [node name="TitleLabel" type="Label" parent="PausePanel/PauseMargin"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "POINT DEFENCE"
 
 [node name="ButtonsVBox" type="VBoxContainer" parent="PausePanel/PauseMargin"]

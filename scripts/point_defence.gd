@@ -3,6 +3,8 @@ extends Node2D
 
 
 signal gun_fired(shake_strength: float, shake_speed: float)
+signal gun_damaged(shake_strength: float, shake_speed: float)
+signal gun_destroyed(shake_strength: float, shake_speed: float)
 signal ammo_changed(value: int)
 
 const STARTING_AMMO: int = 6
@@ -26,6 +28,12 @@ var _shots_fired: int:
 @onready var gun_2: Gun = %Gun2
 @onready var guns: Array[Gun] = [gun_1, gun_2]
 @onready var reload_timer: Timer = %ReloadTimer
+
+
+func _ready() -> void:
+	for gun in guns:
+		gun.gun_destroyed.connect(_on_gun_destroyed)
+		gun.gun_damaged.connect(_on_gun_damaged)
 
 
 func _process(_delta: float) -> void:
@@ -94,3 +102,11 @@ func _on_reload_timer_timeout() -> void:
 	
 	var gun_index: int = _total_shots_fired % 2
 	guns[gun_index].ready_indicator.show()
+
+
+func _on_gun_damaged() -> void:
+	gun_damaged.emit(3.0, 30.0)
+
+
+func _on_gun_destroyed() -> void:
+	gun_destroyed.emit(10.0, 20.0)

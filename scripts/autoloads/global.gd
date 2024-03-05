@@ -18,6 +18,7 @@ var resolutions: Array[Vector2i] = [
 ]
 var missiles_shot_down: int = 0
 
+
 func pause_game() -> void:
 	game_paused = true
 

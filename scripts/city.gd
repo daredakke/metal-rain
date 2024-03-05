@@ -2,6 +2,7 @@ class_name City
 extends Area2D
 
 
+signal city_damaged
 signal city_destroyed
 
 const MAX_HP: int = 5
@@ -31,3 +32,4 @@ func restore() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("explosion") and not area.is_player_explosion:
 		_hp -= 1
+		city_damaged.emit()

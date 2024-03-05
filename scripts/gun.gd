@@ -2,6 +2,9 @@ class_name Gun
 extends Area2D
 
 
+signal gun_damaged
+signal gun_destroyed
+
 const MAX_HP: int = 10
 const MIN_FIRE_RANGE: int = 32
 
@@ -14,6 +17,7 @@ var _hp: int = MAX_HP:
 		if _hp == 0:
 			is_active = false
 			hide()
+			gun_destroyed.emit()
 
 @onready var body: Sprite2D = $Body
 @onready var barrel: Sprite2D = $Barrel
@@ -53,3 +57,5 @@ func restore() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("explosion") and not area.is_player_explosion:
 		_hp -= 1
+		
+		gun_damaged.emit()

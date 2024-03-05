@@ -33,7 +33,10 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("action") and reload_timer.is_stopped():
 		var gun_to_fire_index: int = _shots_fired % 2
-		guns[gun_to_fire_index].fire_bullet(PLAYER_BULLET)
+		
+		if not guns[gun_to_fire_index].fire_bullet(PLAYER_BULLET):
+			return
+		
 		_shots_fired += 1
 		
 		reload_timer.start()

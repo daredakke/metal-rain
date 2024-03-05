@@ -3,6 +3,7 @@ extends Area2D
 
 
 signal missile_destroyed
+signal child_destroyed
 
 const EXPLOSION_SCENE: PackedScene = preload("res://scenes/explosion.tscn")
 const MISSILE_SCENE: PackedScene = preload("res://scenes/missile.tscn")
@@ -14,7 +15,11 @@ var is_mirv: bool = false
 var mirv_split_y: int = randi_range(16, 32)
 var mirv_salvo: int = randi_range(2, 4)
 
+var _is_active: bool = true
 var _explosion_scale := Vector2(0.2, 0.2)
+var _children_destroyed: int = 0
+
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
@@ -22,6 +27,9 @@ func _ready() -> void:
 
 
 func _process(delta) -> void:
+	if not _is_active:
+		return
+	
 	position += direction * speed * delta
 	
 	if is_mirv and global_position.y > mirv_split_y:
@@ -30,6 +38,8 @@ func _process(delta) -> void:
 
 func destroy() -> void:
 	missile_destroyed.emit()
+	child_destroyed.emit()
+
 	queue_free()
 
 
@@ -43,6 +53,11 @@ func explode() -> void:
 
 
 func _split() -> void:
+	_is_active = false
+	collision.disabled = true
+	
+	hide()
+	
 	for i in mirv_salvo:
 		var missile := MISSILE_SCENE.instantiate() as Missile
 		missile.global_position = global_position
@@ -55,10 +70,19 @@ func _split() -> void:
 		missile_trail.set_anchor(global_position)
 		missile_trail.hide()
 		missile.missile_destroyed.connect(missile_trail.destroy)
+		missile.child_destroyed.connect(_child_missile_destroyed)
 		
 		add_sibling(missile_trail)
+
+
+func _child_missile_destroyed() -> void:
+	_children_destroyed += 1
 	
-	destroy()
+	print("SALVO: " + str(mirv_salvo))
+	print("CHILDREN DESTROYED: " + str(_children_destroyed))
+	
+	if _children_destroyed >= mirv_salvo:
+		destroy()
 
 
 func _on_area_entered(area: Area2D) -> void:

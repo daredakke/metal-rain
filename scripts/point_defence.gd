@@ -8,6 +8,7 @@ signal gun_destroyed(shake_strength: float, shake_speed: float)
 signal ammo_changed(value: int)
 
 const STARTING_AMMO: int = 6
+const MAX_AMMO: int = 39
 const SHAKE_STRENGTH: float = 4.0
 const SHAKE_SPEED: float = 30.0
 const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet.tscn")
@@ -15,12 +16,13 @@ const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet.tscn")
 var can_fire: bool = true
 var ammo_left: int:
 	set(value):
-		ammo_left = clampi(value, 0, 39)
+		ammo_left = clampi(value, 0, _ammo_max)
 
+var _ammo_max: int = MAX_AMMO
 var _total_shots_fired: int = 0
 var _shots_fired: int:
 	set(value):
-		_shots_fired = clampi(value, 0, 39)
+		_shots_fired = clampi(value, 0, _ammo_max)
 		
 		ammo_changed.emit(ammo_left - _shots_fired)
 
@@ -71,6 +73,7 @@ func restock_ammo(ammo_restock) -> void:
 
 func reset() -> void:
 	ammo_left = STARTING_AMMO
+	_ammo_max = MAX_AMMO
 	_shots_fired = 0
 	_total_shots_fired = 0
 	
@@ -109,4 +112,9 @@ func _on_gun_damaged() -> void:
 
 
 func _on_gun_destroyed() -> void:
+	_ammo_max = ceili(MAX_AMMO * 0.5)
+	
+	if ammo_left - _shots_fired > _ammo_max:
+		ammo_left = _ammo_max
+	
 	gun_destroyed.emit(10.0, 20.0)

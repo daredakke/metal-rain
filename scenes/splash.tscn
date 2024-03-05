@@ -75,5 +75,3 @@ libraries = {
 wait_time = 2.0
 one_shot = true
 autostart = true
-
-[connection signal="timeout" from="splash_timer" to="." method="_end_splash"]

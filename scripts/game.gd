@@ -65,9 +65,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause") and not Global.game_paused:
 		_pause_game()
 	
-	if Input.is_action_just_pressed("debug_destroy_city"):
-		_debug_destroy_cities()
-	
 	# Don't process camera shake if game paused
 	if Global.game_paused:
 		return
@@ -102,11 +99,6 @@ func _start_level_transition() -> void:
 	level_transition.start(_level)
 
 
-func _debug_destroy_cities() -> void:
-	for city in cities.get_children():
-		city._hp = 0
-
-
 func _next_level() -> void:
 	point_defence.can_fire = true
 	
@@ -116,10 +108,10 @@ func _next_level() -> void:
 	
 	point_defence.restock_ammo(_ammo_restock_amount)
 	
-	missile_spawner.mirv_chance += 0.01
+	missile_spawner.mirv_chance += 0.03
 	missile_spawner.salvo_size += 1
-	missile_spawner.missile_speed += 1.0
-	missile_spawner.spawn_delay -= 0.01
+	missile_spawner.missile_speed += 1.5
+	missile_spawner.spawn_delay -= 0.02
 	missile_spawner.start()
 
 

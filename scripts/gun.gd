@@ -21,6 +21,7 @@ var _hp: int = MAX_HP:
 
 @onready var body: Sprite2D = $Body
 @onready var barrel: Sprite2D = $Barrel
+@onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var ready_indicator: Sprite2D = $ReadyIndicator
 
 
@@ -49,6 +50,7 @@ func fire_bullet(bullet_scene: PackedScene) -> bool:
 
 func restore() -> void:
 	is_active = true
+	collision.disabled = false
 	_hp = MAX_HP
 	
 	show()
@@ -58,4 +60,5 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("explosion") and not area.is_player_explosion:
 		_hp -= 1
 		
+		collision.disabled = true
 		gun_damaged.emit()

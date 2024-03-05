@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=27 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
@@ -16,7 +16,40 @@
 [ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
 [ext_resource type="PackedScene" uid="uid://b0seae6me3ys6" path="res://scenes/splash.tscn" id="7_8erfd"]
 [ext_resource type="Texture2D" uid="uid://bqgaho3ipoijj" path="res://assets/hills.png" id="7_vebe0"]
+[ext_resource type="Shader" path="res://resources/cloud.gdshader" id="8_ggdrj"]
 [ext_resource type="PackedScene" uid="uid://cec0xkicrlgyd" path="res://scenes/cities.tscn" id="14_pohio"]
+
+[sub_resource type="Gradient" id="Gradient_tyaww"]
+offsets = PackedFloat32Array(0.463212, 0.882902, 1)
+colors = PackedColorArray(0.0130435, 0.0130435, 0.0130435, 1, 0.221739, 0.0318147, 0.0318147, 1, 0.134783, 0.134783, 0.134783, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yshoa"]
+seed = 44
+frequency = 0.0014
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jymru"]
+width = 360
+height = 220
+color_ramp = SubResource("Gradient_tyaww")
+noise = SubResource("FastNoiseLite_yshoa")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytcj3"]
+shader = ExtResource("8_ggdrj")
+shader_parameter/scroll = Vector2(-0.02, 0)
+shader_parameter/overlay_scroll = Vector2(-0.06, -0.02)
+shader_parameter/colour_overlay = SubResource("NoiseTexture2D_jymru")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_esbxs"]
+noise_type = 3
+seed = 666
+frequency = 0.0071
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w6807"]
+width = 360
+height = 220
+seamless = true
+normalize = false
+noise = SubResource("FastNoiseLite_esbxs")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gyko"]
 shader = ExtResource("5_hlp2s")
@@ -61,6 +94,25 @@ visible = false
 unique_name_in_owner = true
 
 [node name="Splash" parent="Camera/UI" instance=ExtResource("7_8erfd")]
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+layer = -10
+follow_viewport_enabled = true
+
+[node name="Sky" type="Sprite2D" parent="Camera/CanvasLayer"]
+self_modulate = Color(0.0313726, 0.0313726, 0.0313726, 1)
+position = Vector2(-16, -14)
+scale = Vector2(11, 6.5)
+texture = ExtResource("2_c34ma")
+centered = false
+
+[node name="Noise" type="Sprite2D" parent="Camera/CanvasLayer"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ytcj3")
+texture = SubResource("NoiseTexture2D_w6807")
+centered = false
+offset = Vector2(-20, -20)
 
 [node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 
@@ -84,13 +136,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="Sky" type="Sprite2D" parent="."]
-self_modulate = Color(0.0313726, 0.0313726, 0.0313726, 1)
-position = Vector2(-16, -14)
-scale = Vector2(11, 6.5)
-texture = ExtResource("2_c34ma")
-centered = false
 
 [node name="Hills" type="Sprite2D" parent="."]
 self_modulate = Color(0.45098, 0.0705882, 0.0705882, 1)

@@ -53,7 +53,7 @@ noise = SubResource("FastNoiseLite_esbxs")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gyko"]
 shader = ExtResource("5_hlp2s")
-shader_parameter/strength = 8.0
+shader_parameter/strength = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpfdq"]
 size = Vector2(1150, 27)
@@ -96,37 +96,39 @@ unique_name_in_owner = true
 [node name="Splash" parent="Camera/UI" instance=ExtResource("7_8erfd")]
 visible = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+[node name="BackgroundCanvas" type="CanvasLayer" parent="Camera"]
+process_mode = 1
 layer = -10
 follow_viewport_enabled = true
 
-[node name="Sky" type="Sprite2D" parent="Camera/CanvasLayer"]
+[node name="Sky" type="Sprite2D" parent="Camera/BackgroundCanvas"]
 self_modulate = Color(0.0313726, 0.0313726, 0.0313726, 1)
 position = Vector2(-16, -14)
 scale = Vector2(11, 6.5)
 texture = ExtResource("2_c34ma")
 centered = false
 
-[node name="Noise" type="Sprite2D" parent="Camera/CanvasLayer"]
+[node name="Noise" type="Sprite2D" parent="Camera/BackgroundCanvas"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ytcj3")
 texture = SubResource("NoiseTexture2D_w6807")
 centered = false
 offset = Vector2(-20, -20)
 
-[node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
+[node name="ForegroundCanvas" type="CanvasLayer" parent="Camera"]
 
-[node name="Scanlines" type="Sprite2D" parent="Camera/ScanlineCanvas"]
+[node name="Scanlines" type="Sprite2D" parent="Camera/ForegroundCanvas"]
 self_modulate = Color(1, 1, 1, 0.0980392)
 texture = ExtResource("2_11fqy")
 centered = false
 
-[node name="Vignette" type="Sprite2D" parent="Camera/ScanlineCanvas"]
+[node name="Vignette" type="Sprite2D" parent="Camera/ForegroundCanvas"]
 self_modulate = Color(1, 1, 1, 0.431373)
 texture = ExtResource("4_klfyp")
 centered = false
 
 [node name="FilmGrainCanvas" type="CanvasLayer" parent="Camera"]
+unique_name_in_owner = true
 
 [node name="ColorRect" type="ColorRect" parent="Camera/FilmGrainCanvas"]
 material = SubResource("ShaderMaterial_0gyko")

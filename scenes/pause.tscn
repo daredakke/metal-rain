@@ -80,7 +80,6 @@ text = "QUIT"
 
 [node name="SettingsPanel" type="Panel" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,7 +87,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SettingsMargin" type="MarginContainer" parent="SettingsPanel"]
+[node name="HeadingMargin" type="MarginContainer" parent="SettingsPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,26 +99,49 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="SettingsLabel" type="Label" parent="SettingsPanel/SettingsMargin"]
+[node name="SettingsLabel" type="Label" parent="SettingsPanel/HeadingMargin"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 15
 text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="SettingsCloseButton" type="Button" parent="SettingsPanel/HeadingMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "CLOSE"
+
+[node name="SettingsMargin" type="MarginContainer" parent="SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
 
 [node name="SettingsVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 10
+mouse_filter = 2
+theme_override_constants/separation = 6
 
 [node name="VolumeHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme_override_constants/separation = 10
 
 [node name="MusicVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = -2
+theme_override_constants/separation = -3
 
 [node name="MusicLabelHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/MusicVBox"]
 layout_mode = 2
@@ -147,7 +169,7 @@ value = 1.0
 [node name="SFXVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = -2
+theme_override_constants/separation = -3
 
 [node name="SFXLabelHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/VolumeHBox/SFXVBox"]
 layout_mode = 2
@@ -174,6 +196,7 @@ value = 1.0
 
 [node name="ResolutionVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox"]
 layout_mode = 2
+theme_override_constants/separation = 1
 
 [node name="ResolutionLabel" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/ResolutionVBox"]
 layout_mode = 2
@@ -208,11 +231,28 @@ mouse_default_cursor_shape = 2
 button_group = SubResource("ButtonGroup_n8gan")
 text = "Fullscreen"
 
-[node name="SettingsCloseButton" type="Button" parent="SettingsPanel/SettingsMargin"]
-unique_name_in_owner = true
+[node name="FilmGrainHBox" type="HBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="FilmGrainVBox" type="VBoxContainer" parent="SettingsPanel/SettingsMargin/SettingsVBox/FilmGrainHBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="Spacer" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/FilmGrainHBox/FilmGrainVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 1
+
+[node name="FilmGrainLabel" type="Label" parent="SettingsPanel/SettingsMargin/SettingsVBox/FilmGrainHBox/FilmGrainVBox"]
+layout_mode = 2
+text = "FILM GRAIN"
+
+[node name="FilmGrainCheckBox" type="CheckBox" parent="SettingsPanel/SettingsMargin/SettingsVBox/FilmGrainHBox/FilmGrainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
-text = "CLOSE"
+button_pressed = true
+text = "ON"

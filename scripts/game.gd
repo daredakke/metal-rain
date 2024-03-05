@@ -25,6 +25,7 @@ var _ammo_restock_amount: int = 2
 @onready var splash: Splash = $Camera/UI/Splash
 @onready var point_defence: PointDefence = %PointDefence
 @onready var missile_spawner: MissileSpawner = %MissileSpawner
+@onready var film_grain_canvas: CanvasLayer = %FilmGrainCanvas
 @onready var crosshair: Crosshair = %Crosshair
 @onready var cities: Node2D = %Cities
 @onready var rand = RandomNumberGenerator.new()
@@ -38,6 +39,7 @@ func _ready() -> void:
 	pause.game_continued.connect(_unpause_game)
 	pause.volume_changed.connect(_change_volume)
 	pause.resolution_changed.connect(_resize_screen)
+	pause.film_grain_toggled.connect(_toggle_film_grain)
 	level_transition.initial_transition_finished.connect(_start_new_game)
 	level_transition.level_transitioned.connect(_next_level)
 	point_defence.gun_fired.connect(_shake_screen)
@@ -173,6 +175,10 @@ func _resize_screen(mode: int) -> void:
 func _change_volume(bus_index: int, value: float) -> void:
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	AudioServer.set_bus_mute(bus_index, value < 0.05)
+
+
+func _toggle_film_grain(state: bool) -> void:
+	film_grain_canvas.visible = state
 
 
 func _shake_screen(strength: float, speed: float) -> void:

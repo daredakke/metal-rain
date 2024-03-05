@@ -7,6 +7,7 @@ signal new_game_started
 signal game_exited
 signal volume_changed(bus_index: int, value: float)
 signal resolution_changed(mode: int)
+signal film_grain_toggled(state: bool)
 
 var _delay_process: bool = true
 var _music_bus: int = AudioServer.get_bus_index("Music")
@@ -24,6 +25,7 @@ var _sfx_bus: int = AudioServer.get_bus_index("SFX")
 @onready var one_x_check_box: CheckBox = %OneXCheckBox
 @onready var two_x_check_box: CheckBox = %TwoXCheckBox
 @onready var fullscreen_check_box: CheckBox = %FullscreenCheckBox
+@onready var film_grain_check_box: CheckBox = %FilmGrainCheckBox
 @onready var settings_close_button: Button = %SettingsCloseButton
 
 
@@ -38,6 +40,7 @@ func _ready() -> void:
 	one_x_check_box.pressed.connect(_on_one_x_check_box_pressed)
 	two_x_check_box.pressed.connect(_on_two_x_check_box_pressed)
 	fullscreen_check_box.pressed.connect(_on_fullscreen_check_box_pressed)
+	film_grain_check_box.toggled.connect(_on_film_grain_check_box_toggled)
 	
 	continue_button.hide()
 	settings_panel.hide()
@@ -104,6 +107,15 @@ func _on_two_x_check_box_pressed() -> void:
 
 func _on_fullscreen_check_box_pressed() -> void:
 	_resolution_changed(Global.Mode.FULLSCREEN)
+
+
+func _on_film_grain_check_box_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		film_grain_check_box.text = "ON"
+	else:
+		film_grain_check_box.text = "OFF"
+	
+	film_grain_toggled.emit(toggled_on)
 
 
 func _resolution_changed(mode: int) -> void:

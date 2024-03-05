@@ -39,7 +39,6 @@ visible = false
 
 [node name="HUD" parent="Camera/UI" instance=ExtResource("3_ftxco")]
 unique_name_in_owner = true
-mouse_filter = 2
 
 [node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 

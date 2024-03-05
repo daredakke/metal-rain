@@ -9,11 +9,14 @@ const MAX_HP: int = 10
 var _hp: int = MAX_HP:
 	set(value):
 		_hp = clampi(value, 0, MAX_HP)
-		print("CITY: " + str(_hp))
 		
 		if _hp == 0:
 			city_destroyed.emit()
 			queue_free()
+		
+		sprite.frame = MAX_HP - _hp
+
+@onready var sprite: Sprite2D = $Sprite2D
 
 
 func _on_area_entered(area: Area2D) -> void:

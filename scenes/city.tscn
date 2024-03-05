@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://btxpimh14sowk"]
 
 [ext_resource type="Script" path="res://scripts/city.gd" id="1_dpdj2"]
-[ext_resource type="Texture2D" uid="uid://msd2wsmvslsx" path="res://assets/city.png" id="1_uvq6u"]
+[ext_resource type="Texture2D" uid="uid://conien633ks8u" path="res://assets/city-sheet.png" id="2_w03hk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivenc"]
 size = Vector2(32, 22)
@@ -11,7 +11,8 @@ scale = Vector2(0.67, 0.67)
 script = ExtResource("1_dpdj2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_uvq6u")
+texture = ExtResource("2_w03hk")
+hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

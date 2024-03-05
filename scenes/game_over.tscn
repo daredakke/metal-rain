@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://vf1brxqbwo11"]
+
+[ext_resource type="Theme" uid="uid://u7gxkwcxwqut" path="res://resources/custom.tres" id="1_086gg"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="2_im83m"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_086gg")
+script = ExtResource("2_im83m")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="OuterMargin" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GameOverLabel" type="Label" parent="Panel/OuterMargin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "THE END"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Panel/OuterMargin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(178, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "CLOSE"
+
+[node name="InnerMargin" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 10
+
+[node name="StatsVBox" type="VBoxContainer" parent="Panel/InnerMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="MissilesDestroyedLabel" type="Label" parent="Panel/InnerMargin/StatsVBox"]
+layout_mode = 2
+text = "MISSILES DESTROYED"
+horizontal_alignment = 1
+
+[node name="MissilesDestroyedValue" type="Label" parent="Panel/InnerMargin/StatsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "99"
+horizontal_alignment = 1
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Panel/OuterMargin/CloseButton" to="." method="_on_close_button_pressed"]

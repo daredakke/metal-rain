@@ -16,7 +16,7 @@ var resolutions: Array[Vector2i] = [
 	Vector2i(640, 360),
 	Vector2i(1280, 720),
 ]
-
+var missiles_shot_down: int = 0
 
 func pause_game() -> void:
 	game_paused = true

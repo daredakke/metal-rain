@@ -22,6 +22,7 @@ var _ammo_restock_amount: int = 2
 @onready var level_transition: LevelTransition = %LevelTransition
 @onready var game_over: GameOver = %GameOver
 @onready var fade_out: FadeOut = %FadeOut
+@onready var splash: Splash = $Camera/UI/Splash
 @onready var point_defence: PointDefence = %PointDefence
 @onready var missile_spawner: MissileSpawner = %MissileSpawner
 @onready var crosshair: Crosshair = %Crosshair

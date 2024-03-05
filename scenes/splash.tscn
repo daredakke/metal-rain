@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0seae6me3ys6"]
+
+[ext_resource type="Theme" uid="uid://u7gxkwcxwqut" path="res://resources/custom.tres" id="1_a0ia4"]
+[ext_resource type="Texture2D" uid="uid://c77sw1wl2st5f" path="res://assets/hatenasoft1-white.png" id="2_icl14"]
+[ext_resource type="Script" path="res://scripts/splash.gd" id="2_lk134"]
+
+[sub_resource type="Animation" id="Animation_eng16"]
+resource_name = "boiling"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HatenaSoftLogo:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_7nb1c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HatenaSoftLogo:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ao0x"]
+_data = {
+"RESET": SubResource("Animation_7nb1c"),
+"boiling": SubResource("Animation_eng16")
+}
+
+[node name="Splash" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_a0ia4")
+script = ExtResource("2_lk134")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HatenaSoftLogo" type="Sprite2D" parent="."]
+position = Vector2(160, 95)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_icl14")
+hframes = 3
+
+[node name="Boiling" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1ao0x")
+}
+
+[node name="splash_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="splash_timer" to="." method="_end_splash"]

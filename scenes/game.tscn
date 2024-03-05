@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=20 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dwrq2caodhkg6" path="res://scenes/fade_out.tscn" id="6_pfn60"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
 [ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
+[ext_resource type="PackedScene" uid="uid://b0seae6me3ys6" path="res://scenes/splash.tscn" id="7_8erfd"]
 [ext_resource type="Texture2D" uid="uid://bqgaho3ipoijj" path="res://assets/hills.png" id="7_vebe0"]
 [ext_resource type="PackedScene" uid="uid://cec0xkicrlgyd" path="res://scenes/cities.tscn" id="14_pohio"]
 
@@ -58,6 +59,8 @@ visible = false
 
 [node name="FadeOut" parent="Camera/UI" instance=ExtResource("6_pfn60")]
 unique_name_in_owner = true
+
+[node name="Splash" parent="Camera/UI" instance=ExtResource("7_8erfd")]
 
 [node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://conien633ks8u" path="res://assets/city-sheet.png" id="2_w03hk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivenc"]
-size = Vector2(32, 22)
+size = Vector2(29.8507, 5.55224)
 
 [node name="City" type="Area2D"]
 scale = Vector2(0.67, 0.67)
@@ -15,7 +15,7 @@ texture = ExtResource("2_w03hk")
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, 13.2239)
 shape = SubResource("RectangleShape2D_ivenc")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -20,8 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://cec0xkicrlgyd" path="res://scenes/cities.tscn" id="14_pohio"]
 
 [sub_resource type="Gradient" id="Gradient_tyaww"]
-offsets = PackedFloat32Array(0.463212, 0.882902, 1)
-colors = PackedColorArray(0.0130435, 0.0130435, 0.0130435, 1, 0.221739, 0.0318147, 0.0318147, 1, 0.134783, 0.134783, 0.134783, 1)
+offsets = PackedFloat32Array(0.255959, 0.385492, 0.882902, 1)
+colors = PackedColorArray(0.0130435, 0.0130435, 0.0130435, 1, 0.0304348, 0, 0, 1, 0.221739, 0.0318147, 0.0318147, 1, 0.134783, 0.134783, 0.134783, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_yshoa"]
 seed = 44

@@ -20,6 +20,7 @@ var _ammo_restock_amount: int = 2
 @onready var pause: Control = %Pause
 @onready var hud: Control = %HUD
 @onready var game_over: GameOver = %GameOver
+@onready var level_transition: LevelTransition = %LevelTransition
 @onready var point_defence: PointDefence = %PointDefence
 @onready var missile_spawner: MissileSpawner = %MissileSpawner
 @onready var crosshair: Crosshair = %Crosshair
@@ -29,12 +30,14 @@ var _ammo_restock_amount: int = 2
 
 
 func _ready() -> void:
-	level_end_delay.timeout.connect(_next_level)
-	pause.new_game_started.connect(_start_new_game)
+	level_end_delay.timeout.connect(_start_level_transition)
+	pause.new_game_started.connect(_new_game_transition)
 	pause.game_exited.connect(_quit_game)
 	pause.game_continued.connect(_unpause_game)
 	pause.volume_changed.connect(_change_volume)
 	pause.resolution_changed.connect(_resize_screen)
+	level_transition.initial_transition_finished.connect(_start_new_game)
+	level_transition.level_transitioned.connect(_next_level)
 	point_defence.gun_fired.connect(_shake_screen)
 	point_defence.ammo_changed.connect(hud.display_shot_indicators)
 	missile_spawner.level_over.connect(_end_level)
@@ -66,15 +69,30 @@ func _process(delta: float) -> void:
 
 
 func _start_new_game() -> void:
+	point_defence.can_fire = true
+	
+	missile_spawner.start()
+
+
+func _new_game_transition() -> void:
 	Global.game_started = true
 	_level = 1
+	
+	_unpause_game()
 	
 	for city in cities.get_children():
 		city.restore()
 	
 	missile_spawner.reset()
 	point_defence.reset()
-	_unpause_game()
+	
+	level_transition.shuffle_messages()
+	_start_level_transition()
+
+
+func _start_level_transition() -> void:
+	point_defence.can_fire = false
+	level_transition.start(_level)
 
 
 func _debug_destroy_cities() -> void:
@@ -82,24 +100,12 @@ func _debug_destroy_cities() -> void:
 		city._hp = 0
 
 
-func _pause_game() -> void:
-	Global.pause_game()
-	_handle_pause_state()
-
-
-func _unpause_game() -> void:
-	Global.unpause_game()
-	_handle_pause_state()
-
-
-func _end_level() -> void:
-	_level += 1
-	
-	level_end_delay.start()
-
-
 func _next_level() -> void:
+	point_defence.can_fire = true
+	
 	_ammo_restock_amount += 3 if _level % 3 == 0 else 0
+	
+	print(_ammo_restock_amount)
 	
 	point_defence.restock_ammo(_ammo_restock_amount)
 	
@@ -110,6 +116,12 @@ func _next_level() -> void:
 	missile_spawner.start()
 
 
+func _end_level() -> void:
+	_level += 1
+	
+	level_end_delay.start()
+
+
 func _game_over() -> void:
 	# Remove any screen shake
 	camera.offset = Vector2.ZERO
@@ -118,6 +130,16 @@ func _game_over() -> void:
 	game_over.show()
 	pause.continue_button.hide()
 	_pause_game()
+
+
+func _pause_game() -> void:
+	Global.pause_game()
+	_handle_pause_state()
+
+
+func _unpause_game() -> void:
+	Global.unpause_game()
+	_handle_pause_state()
 
 
 func _handle_pause_state() -> void:

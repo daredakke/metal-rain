@@ -78,9 +78,6 @@ func _split() -> void:
 func _child_missile_destroyed() -> void:
 	_children_destroyed += 1
 	
-	print("SALVO: " + str(mirv_salvo))
-	print("CHILDREN DESTROYED: " + str(_children_destroyed))
-	
 	if _children_destroyed >= mirv_salvo:
 		destroy()
 

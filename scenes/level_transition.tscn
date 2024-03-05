@@ -1,0 +1,124 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh8p6duapaelr"]
+
+[ext_resource type="Theme" uid="uid://u7gxkwcxwqut" path="res://resources/custom.tres" id="1_3v15b"]
+[ext_resource type="Script" path="res://scripts/level_transition.gd" id="2_0v4tc"]
+
+[sub_resource type="Animation" id="Animation_xjc68"]
+resource_name = "fade_out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(5.46416, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wd4kn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ohcth"]
+_data = {
+"RESET": SubResource("Animation_wd4kn"),
+"fade_out": SubResource("Animation_xjc68")
+}
+
+[node name="LevelTransition" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_3v15b")
+script = ExtResource("2_0v4tc")
+
+[node name="TransitionPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MessageLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -31.5
+offset_right = 160.0
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "TEST"
+horizontal_alignment = 1
+
+[node name="LevelVBox" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -85.5
+offset_right = 96.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -15
+
+[node name="DayLabel" type="Label" parent="LevelVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "DAY"
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="LevelVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "99"
+horizontal_alignment = 1
+
+[node name="FadeOut" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ohcth")
+}
+
+[node name="WordDuration" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.15
+
+[connection signal="animation_finished" from="FadeOut" to="." method="_on_fade_out_animation_finished"]
+[connection signal="timeout" from="WordDuration" to="." method="_on_word_duration_timeout"]

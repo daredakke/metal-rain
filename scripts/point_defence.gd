@@ -10,6 +10,7 @@ const SHAKE_STRENGTH: float = 4.0
 const SHAKE_SPEED: float = 30.0
 const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet.tscn")
 
+var can_fire: bool = true
 var ammo_left: int:
 	set(value):
 		ammo_left = clampi(value, 0, 39)
@@ -27,7 +28,7 @@ var _shots_fired: int:
 
 
 func _process(_delta: float) -> void:
-	if _shots_fired >= ammo_left:
+	if not can_fire or _shots_fired >= ammo_left:
 		return
 	
 	if Input.is_action_just_pressed("action") and reload_timer.is_stopped():
@@ -51,7 +52,7 @@ func _process(_delta: float) -> void:
 		gun_fired.emit(SHAKE_STRENGTH, SHAKE_SPEED)
 
 
-func restock_ammo(ammo_restock = 0) -> void:
+func restock_ammo(ammo_restock) -> void:
 	ammo_left = (ammo_left - _shots_fired) + ammo_restock
 	_shots_fired = 0
 	

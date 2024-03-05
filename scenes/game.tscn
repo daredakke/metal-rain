@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=18 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ww6puhk2ehsr" path="res://assets/screen-vignette-320x180.png" id="4_klfyp"]
 [ext_resource type="PackedScene" uid="uid://vf1brxqbwo11" path="res://scenes/game_over.tscn" id="4_qfk3x"]
 [ext_resource type="Shader" path="res://resources/film_grain.gdshader" id="5_hlp2s"]
+[ext_resource type="PackedScene" uid="uid://bh8p6duapaelr" path="res://scenes/level_transition.tscn" id="5_ii8vw"]
 [ext_resource type="PackedScene" uid="uid://bmt6wrbs50cbi" path="res://scenes/point_defence.tscn" id="5_v02w3"]
 [ext_resource type="Script" path="res://scripts/crosshair.gd" id="6_3pc0k"]
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
@@ -44,6 +45,10 @@ visible = false
 
 [node name="HUD" parent="Camera/UI" instance=ExtResource("3_ftxco")]
 unique_name_in_owner = true
+
+[node name="LevelTransition" parent="Camera/UI" instance=ExtResource("5_ii8vw")]
+unique_name_in_owner = true
+visible = false
 
 [node name="GameOver" parent="Camera/UI" instance=ExtResource("4_qfk3x")]
 unique_name_in_owner = true

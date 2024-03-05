@@ -9,4 +9,3 @@ script = ExtResource("1_43b2b")
 [node name="SpawnDelay" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 2.0
-autostart = true

@@ -114,7 +114,7 @@ func _next_level() -> void:
 	missile_spawner.mirv_chance += 0.01
 	missile_spawner.salvo_size += 1
 	missile_spawner.missile_speed += 1.0
-	missile_spawner.spawn_delay -= 0.005
+	missile_spawner.spawn_delay -= 0.008
 	missile_spawner.start()
 
 

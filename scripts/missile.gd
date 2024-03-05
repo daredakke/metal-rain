@@ -8,11 +8,13 @@ const EXPLOSION_SCENE: PackedScene = preload("res://scenes/explosion.tscn")
 const MISSILE_SCENE: PackedScene = preload("res://scenes/missile.tscn")
 const MISSILE_TRAIL_SCENE: PackedScene = preload("res://scenes/missile_trail.tscn")
 
-var speed: float = 15
+var speed: float = 13.0
 var direction: Vector2
 var is_mirv: bool = false
 var mirv_split_y: int = randi_range(16, 32)
 var mirv_salvo: int = randi_range(2, 4)
+
+var _explosion_scale := Vector2(0.2, 0.2)
 
 
 func _ready() -> void:
@@ -34,7 +36,7 @@ func destroy() -> void:
 func explode() -> void:
 	var explosion := EXPLOSION_SCENE.instantiate() as Explosion
 	explosion.global_position = global_position
-	explosion.scale = Vector2(0.2, 0.2)
+	explosion.scale = _explosion_scale
 	
 	add_sibling(explosion)
 	destroy()
@@ -60,13 +62,11 @@ func _split() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("missile"):
+	if area.is_in_group("projectile"):
 		return
 	
 	if area.is_in_group("explosion"):
-		if area.is_friendly:
+		if area.is_player_explosion:
 			destroy()
-	elif area.is_in_group("player_bullet"):
-		call_deferred("destroy")
 	else:
 		call_deferred("explode")

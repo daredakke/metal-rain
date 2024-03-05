@@ -12,6 +12,7 @@ var _noise_i: float = 0.0
 var _shake_strength: float = 0.0:
 	set(value):
 		_shake_strength = clampf(value, 0.0, 100.0)
+var level: int = 1
 
 @onready var camera: Camera2D = %Camera
 @onready var pause: Control = %Pause

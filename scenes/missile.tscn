@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1io7"]
 size = Vector2(8, 2)
 
-[node name="Missile" type="Area2D" groups=["missile"]]
+[node name="Missile" type="Area2D" groups=["projectile"]]
 process_mode = 1
 script = ExtResource("1_n6vy5")
 

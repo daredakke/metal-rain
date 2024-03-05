@@ -2,7 +2,7 @@ class_name Explosion
 extends Area2D
 
 
-var is_friendly: bool = false
+var is_player_explosion: bool = false
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var damage_duration: Timer = $DamageDuration

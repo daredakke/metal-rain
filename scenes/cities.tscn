@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cec0xkicrlgyd"]
+
+[ext_resource type="PackedScene" uid="uid://btxpimh14sowk" path="res://scenes/city.tscn" id="1_ah1lt"]
+[ext_resource type="Script" path="res://scripts/cities.gd" id="1_op27v"]
+
+[node name="Cities" type="Node2D"]
+position = Vector2(0, 6)
+script = ExtResource("1_op27v")
+
+[node name="City1" parent="." instance=ExtResource("1_ah1lt")]
+position = Vector2(80, 155)
+
+[node name="City2" parent="." instance=ExtResource("1_ah1lt")]
+position = Vector2(110, 155)
+
+[node name="City3" parent="." instance=ExtResource("1_ah1lt")]
+position = Vector2(140, 155)
+
+[node name="City4" parent="." instance=ExtResource("1_ah1lt")]
+position = Vector2(180, 155)
+
+[node name="City5" parent="." instance=ExtResource("1_ah1lt")]
+position = Vector2(210, 155)
+
+[node name="City6" parent="." instance=ExtResource("1_ah1lt")]
+position = Vector2(240, 155)

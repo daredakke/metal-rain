@@ -6,9 +6,16 @@ extends Control
 @onready var missiles_destroyed_value: Label = %MissilesDestroyedValue
 
 
+func _ready() -> void:
+	hide()
+
+
 func _on_close_button_pressed() -> void:
+	Global.missiles_shot_down = 0
+	
 	hide()
 
 
 func _on_visibility_changed() -> void:
-	missiles_destroyed_value.text = str(Global.missiles_shot_down)
+	if visible:
+		missiles_destroyed_value.text = str(Global.missiles_shot_down)

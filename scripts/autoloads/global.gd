@@ -12,6 +12,7 @@ var game_paused: bool:
 	set(new_value):
 		game_paused = new_value
 		get_tree().paused = game_paused
+var game_over: bool = false
 var resolutions: Array[Vector2i] = [
 	Vector2i(640, 360),
 	Vector2i(1280, 720),

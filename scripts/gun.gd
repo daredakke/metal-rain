@@ -2,19 +2,18 @@ class_name Gun
 extends Area2D
 
 
-signal gun_destroyed
-
-const MAX_HP: int = 20
+const MAX_HP: int = 10
 const MIN_FIRE_RANGE: int = 32
+
+var is_active: bool = true
 
 var _hp: int = MAX_HP:
 	set(value):
 		_hp = clampi(value, 0, MAX_HP)
-		print("GUN: " + str(_hp))
 		
 		if _hp == 0:
-			gun_destroyed.emit()
-			queue_free()
+			is_active = false
+			hide()
 
 @onready var body: Sprite2D = $Body
 @onready var barrel: Sprite2D = $Barrel
@@ -22,6 +21,9 @@ var _hp: int = MAX_HP:
 
 
 func _process(_delta: float) -> void:
+	if not is_active:
+		return
+	
 	barrel.look_at(get_global_mouse_position())
 	barrel.rotation = deg_to_rad(clampf(barrel.rotation_degrees, -160, -20))
 
@@ -39,6 +41,13 @@ func fire_bullet(bullet_scene: PackedScene) -> bool:
 	ready_indicator.hide()
 	
 	return true
+
+
+func restore() -> void:
+	is_active = true
+	_hp = MAX_HP
+	
+	show()
 
 
 func _on_area_entered(area: Area2D) -> void:

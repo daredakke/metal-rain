@@ -17,8 +17,8 @@ func _ready() -> void:
 
 
 func display_shot_indicators(count: int) -> void:
-	for node in ammo_left.get_children():
-		node.visible = false
+	for indicator in ammo_left.get_children():
+		indicator.visible = false
 	
 	for i in count:
 		ammo_left.get_child(i).visible = true

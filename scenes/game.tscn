@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bp0d2bimtn7id" path="res://assets/crosshair-2.png" id="6_qkol0"]
 [ext_resource type="PackedScene" uid="uid://c3cn7i2gfer1n" path="res://scenes/missile_spawner.tscn" id="6_y6ruk"]
 [ext_resource type="Texture2D" uid="uid://bqgaho3ipoijj" path="res://assets/hills.png" id="7_vebe0"]
-[ext_resource type="PackedScene" uid="uid://btxpimh14sowk" path="res://scenes/city.tscn" id="10_2a1qj"]
+[ext_resource type="PackedScene" uid="uid://cec0xkicrlgyd" path="res://scenes/cities.tscn" id="14_pohio"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0gyko"]
 shader = ExtResource("5_hlp2s")
@@ -25,6 +25,10 @@ size = Vector2(1150, 27)
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_oc5kj")
+
+[node name="LevelEndDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -42,6 +46,8 @@ visible = false
 unique_name_in_owner = true
 
 [node name="GameOver" parent="Camera/UI" instance=ExtResource("4_qfk3x")]
+unique_name_in_owner = true
+visible = false
 
 [node name="ScanlineCanvas" type="CanvasLayer" parent="Camera"]
 
@@ -98,6 +104,7 @@ position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_wpfdq")
 
 [node name="MissileSpawner" parent="." instance=ExtResource("6_y6ruk")]
+unique_name_in_owner = true
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -106,23 +113,5 @@ scale = Vector2(0.67, 0.67)
 texture = ExtResource("6_qkol0")
 script = ExtResource("6_3pc0k")
 
-[node name="Cities" type="Node2D" parent="."]
-position = Vector2(0, 6)
-
-[node name="City1" parent="Cities" instance=ExtResource("10_2a1qj")]
-position = Vector2(80, 155)
-
-[node name="City2" parent="Cities" instance=ExtResource("10_2a1qj")]
-position = Vector2(110, 155)
-
-[node name="City3" parent="Cities" instance=ExtResource("10_2a1qj")]
-position = Vector2(140, 155)
-
-[node name="City4" parent="Cities" instance=ExtResource("10_2a1qj")]
-position = Vector2(180, 155)
-
-[node name="City5" parent="Cities" instance=ExtResource("10_2a1qj")]
-position = Vector2(210, 155)
-
-[node name="City6" parent="Cities" instance=ExtResource("10_2a1qj")]
-position = Vector2(240, 155)
+[node name="Cities" parent="." instance=ExtResource("14_pohio")]
+unique_name_in_owner = true

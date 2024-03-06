@@ -10,9 +10,9 @@ var messages: Array[String] = [
 	"THE END IS NIGH",
 	"HELP ISN'T COMING",
 	"YOU CAN'T SAVE THEM",
-	"NO FUTURE",
+	"NO FUTURE FOR YOU",
 	"A FUTILE EFFORT",
-	"GIVE UP",
+	"TIME TO GIVE UP",
 	"THERE IS NO POINT",
 	"ONLY DESPAIR WILL REMAIN",
 	"WHAT CAN YOU DO?",
@@ -21,16 +21,16 @@ var messages: Array[String] = [
 	"A HOPELESS PLIGHT",
 	"ALL FOR NOTHING",
 	"ONLY A MATTER OF TIME",
-	"ALONE ON THIS BARREN EARTH",
+	"LIFELESS BARREN EARTH",
 	"THIS WORLD IS A TOMB",
 	"ALL WILL PERISH",
 	"SAY YOUR PRAYERS",
 	"THIS PLACE IS YOUR GRAVE",
 	"A LONG SILENCE WILL FOLLOW",
 	"THERE ARE NO WINNERS",
-	"NO ESCAPE",
+	"NO ESCAPE FROM FATE",
 	"ALL IS OVER",
-	"WASHED AWAY BY THE RAINS",
+	"THE NEXT GREAT FLOOD COMES",
 	"THE SKY IS FALLING",
 	"CLEANSE THE EARTH",
 	"DUST AND ECHOES",
@@ -41,6 +41,8 @@ var messages: Array[String] = [
 	"CUT DOWN BY THE REAPER",
 	"THERE IS NOTHING YOU CAN DO",
 	"YOU WON'T LAST FOREVER",
+	"HEED THE REAPER'S CALL",
+	"FACE THE TRUTH",
 ]
 
 var _message_index: int = 0:
@@ -86,6 +88,7 @@ func start(current_level: int) -> void:
 	message_label.show()
 	level_v_box.hide()
 	word_duration.start()
+	Global.transition_message_shown.emit()
 
 
 func _show_level_message() -> void:
@@ -94,6 +97,7 @@ func _show_level_message() -> void:
 	level_v_box.show()
 	
 	fade_out.play("fade_out")
+	Global.transition_level_shown.emit()
 
 
 func _on_word_duration_timeout() -> void:
@@ -105,6 +109,7 @@ func _on_word_duration_timeout() -> void:
 	
 	message_label.text = _split_message[_word_index]
 	_word_index += 1
+	Global.transition_message_shown.emit()
 
 
 func _on_fade_out_animation_finished(_anim_name: StringName) -> void:

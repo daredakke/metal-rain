@@ -3,6 +3,8 @@ extends Node
 
 signal missile_exploded
 signal player_shot
+signal transition_message_shown
+signal transition_level_shown
 
 enum Mode {
 	WINDOW_ONE,

@@ -16,7 +16,7 @@ func _ready() -> void:
 	Global.player_shot.connect(_play_player_shot)
 	Global.player_shot_exploded.connect(_play_player_shot_exploded)
 	Global.transition_message_shown.connect(_play_transition_message_shown)
-	Global.transition_level_shown.connect(_play_transition_level_shown)
+	Global.transition_level_shown.connect(play_transition_level_shown)
 
 
 func play_button_pressed() -> void:
@@ -26,6 +26,10 @@ func play_button_pressed() -> void:
 func play_button_hovered() -> void:
 	if not button_press_sfx.playing:
 		button_hover_sfx.play()
+
+
+func play_transition_level_shown() -> void:
+	transition_level_sfx.play()
 
 
 func _play_missile_exploded() -> void:
@@ -38,10 +42,6 @@ func _play_player_shot() -> void:
 
 func _play_transition_message_shown() -> void:
 	transition_message_sfx.play()
-
-
-func _play_transition_level_shown() -> void:
-	transition_level_sfx.play()
 
 
 func _play_player_shot_exploded() -> void:

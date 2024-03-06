@@ -82,12 +82,13 @@ func _process(delta: float) -> void:
 func _connect_button_sfx(node: Node) -> void:
 	if node is Button:
 		node.mouse_entered.connect(_button_hovered)
-		node.focus_entered.connect(_button_hovered)
 		node.pressed.connect(_button_pressed)
 	
 	if node is HSlider:
 		node.mouse_entered.connect(_button_hovered)
-		node.focus_entered.connect(_button_hovered)
+		
+	if node.is_in_group("sfx_slider"):
+		node.drag_ended.connect(_sfx_slider_drag_ended)
 
 
 func _start_new_game() -> void:
@@ -148,6 +149,7 @@ func _game_over() -> void:
 	camera.offset = Vector2.ZERO
 	Global.game_started = false
 	
+	audio_bus._play_transition_level_shown()
 	game_over.show()
 	pause.continue_button.hide()
 	_pause_game()
@@ -215,6 +217,10 @@ func _button_hovered() -> void:
 
 
 func _button_pressed() -> void:
+	audio_bus.play_button_pressed()
+
+
+func _sfx_slider_drag_ended(_value_changed: float) -> void:
 	audio_bus.play_button_pressed()
 
 

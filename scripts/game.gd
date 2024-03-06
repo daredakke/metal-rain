@@ -122,8 +122,6 @@ func _next_level() -> void:
 	
 	_ammo_restock_amount += 3 if _level % 3 == 0 else 0
 	
-	print(_ammo_restock_amount)
-	
 	point_defence.restock_ammo(_ammo_restock_amount)
 	
 	missile_spawner.mirv_chance += 0.03

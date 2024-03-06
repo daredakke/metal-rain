@@ -8,11 +8,13 @@ extends Node
 @onready var player_shot_sfx: AudioStreamPlayer2D = $PlayerShotSFX
 @onready var transition_message_sfx: AudioStreamPlayer = $TransitionMessageSFX
 @onready var transition_level_sfx: AudioStreamPlayer = $TransitionLevelSFX
+@onready var player_shot_explosion_sfx: AudioStreamPlayer2D = $PlayerShotExplosionSFX
 
 
 func _ready() -> void:
 	Global.missile_exploded.connect(_play_missile_exploded)
 	Global.player_shot.connect(_play_player_shot)
+	Global.player_shot_exploded.connect(_play_player_shot_exploded)
 	Global.transition_message_shown.connect(_play_transition_message_shown)
 	Global.transition_level_shown.connect(_play_transition_level_shown)
 
@@ -42,12 +44,20 @@ func _play_transition_level_shown() -> void:
 	transition_level_sfx.play()
 
 
+func _play_player_shot_exploded() -> void:
+	player_shot_explosion_sfx.play()
+
+
 func _on_missile_explosion_sfx_finished() -> void:
 	_modulate_pitch(missile_explosion_sfx)
 
 
 func _on_player_shot_sfx_finished() -> void:
 	_modulate_pitch(player_shot_sfx)
+
+
+func _on_player_shot_explosion_sfx_finished() -> void:
+	_modulate_pitch(player_shot_explosion_sfx)
 
 
 func _modulate_pitch(audio_player: AudioStreamPlayer2D) -> void:

@@ -26,6 +26,7 @@ func _process(delta) -> void:
 		explosion.scale = Vector2(0.3, 0.3)
 		explosion.is_player_explosion = true
 		
+		Global.player_shot_exploded.emit()
 		add_sibling(explosion)
 		queue_free()
 	

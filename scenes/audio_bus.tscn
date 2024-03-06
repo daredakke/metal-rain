@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ebnhlnrcgnh3"]
+[gd_scene load_steps=6 format=3 uid="uid://ebnhlnrcgnh3"]
 
 [ext_resource type="Script" path="res://scripts/audio_bus.gd" id="1_m2j41"]
 [ext_resource type="AudioStream" uid="uid://ce0tvs4v6dgpx" path="res://assets/sfx/blip-1.wav" id="2_hjekk"]
 [ext_resource type="AudioStream" uid="uid://drylh3cswwalt" path="res://assets/sfx/blip-2.wav" id="3_fus0w"]
 [ext_resource type="AudioStream" uid="uid://cm1reejmxvtvd" path="res://assets/sfx/player-death-1.wav" id="4_b3dgu"]
+[ext_resource type="AudioStream" uid="uid://c0q13efqepva4" path="res://assets/sfx/shot-1.wav" id="5_5u38q"]
 
 [node name="AudioBus" type="Node"]
 script = ExtResource("1_m2j41")
@@ -25,6 +26,12 @@ volume_db = -2.0
 max_distance = 720.0
 max_polyphony = 16
 panning_strength = 0.7
+bus = &"SFX"
+
+[node name="PlayerShotSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5u38q")
+volume_db = -2.0
+max_distance = 720.0
 bus = &"SFX"
 
 [connection signal="finished" from="MissileExplosionSFX" to="." method="_on_missile_explosion_sfx_finished"]

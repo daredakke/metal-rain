@@ -60,6 +60,7 @@ func _process(_delta: float) -> void:
 		_shots_fired += 1
 		_total_shots_fired += 1
 		
+		Global.player_shot.emit()
 		reload_timer.start()
 		gun_fired.emit(SHAKE_STRENGTH, SHAKE_SPEED)
 

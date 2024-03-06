@@ -2,6 +2,7 @@ extends Node
 
 
 signal missile_exploded
+signal player_shot
 
 enum Mode {
 	WINDOW_ONE,

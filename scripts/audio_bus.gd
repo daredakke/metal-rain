@@ -5,10 +5,12 @@ extends Node
 @onready var button_hover_sfx: AudioStreamPlayer = $ButtonHoverSFX
 @onready var button_press_sfx: AudioStreamPlayer = $ButtonPressSFX
 @onready var missile_explosion_sfx: AudioStreamPlayer2D = $MissileExplosionSFX
+@onready var player_shot_sfx: AudioStreamPlayer2D = $PlayerShotSFX
 
 
 func _ready() -> void:
 	Global.missile_exploded.connect(_play_missile_exploded)
+	Global.player_shot.connect(_play_player_shot)
 
 
 func play_button_pressed() -> void:
@@ -22,6 +24,10 @@ func play_button_hovered() -> void:
 
 func _play_missile_exploded() -> void:
 	missile_explosion_sfx.play()
+
+
+func _play_player_shot() -> void:
+	player_shot_sfx.play()
 
 
 func _on_missile_explosion_sfx_finished() -> void:

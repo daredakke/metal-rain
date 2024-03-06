@@ -48,6 +48,7 @@ func explode() -> void:
 	explosion.global_position = global_position
 	explosion.scale = _explosion_scale
 	
+	Global.missile_exploded.emit()
 	add_sibling(explosion)
 	destroy()
 

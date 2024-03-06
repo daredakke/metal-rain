@@ -217,7 +217,7 @@ func _button_hovered() -> void:
 
 
 func _button_pressed() -> void:
-	audio_bus.play_button_selected()
+	audio_bus.play_button_pressed()
 
 
 func _quit_game() -> void:

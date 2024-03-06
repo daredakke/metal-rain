@@ -1,6 +1,8 @@
 extends Node
 
 
+signal missile_exploded
+
 enum Mode {
 	WINDOW_ONE,
 	WINDOW_TWO,

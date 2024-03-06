@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://34b7j3gtv52w"]
+[gd_scene load_steps=28 format=3 uid="uid://34b7j3gtv52w"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_oc5kj"]
 [ext_resource type="Texture2D" uid="uid://hjdwuxti4fx5" path="res://assets/scanlines-320-180.png" id="2_11fqy"]
 [ext_resource type="Texture2D" uid="uid://c50yy162sjepq" path="res://assets/square-white-32.png" id="2_c34ma"]
 [ext_resource type="PackedScene" uid="uid://bmxxklak7iscb" path="res://scenes/pause.tscn" id="2_pkmcc"]
+[ext_resource type="PackedScene" uid="uid://ebnhlnrcgnh3" path="res://scenes/audio_bus.tscn" id="2_plsrq"]
 [ext_resource type="PackedScene" uid="uid://cc87yticxa4o5" path="res://scenes/hud.tscn" id="3_ftxco"]
 [ext_resource type="Texture2D" uid="uid://ww6puhk2ehsr" path="res://assets/screen-vignette-320x180.png" id="4_klfyp"]
 [ext_resource type="PackedScene" uid="uid://vf1brxqbwo11" path="res://scenes/game_over.tscn" id="4_qfk3x"]
@@ -61,6 +62,9 @@ size = Vector2(1150, 27)
 [node name="Game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_oc5kj")
+
+[node name="AudioBus" parent="." instance=ExtResource("2_plsrq")]
+unique_name_in_owner = true
 
 [node name="LevelEndDelay" type="Timer" parent="."]
 unique_name_in_owner = true

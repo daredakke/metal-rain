@@ -15,6 +15,7 @@ var _shake_strength: float = 0.0:
 var _level: int = 1
 var _ammo_restock_amount: int = 2
 
+@onready var audio_bus: AudioBus = %AudioBus
 @onready var level_end_delay: Timer = %LevelEndDelay
 @onready var camera: Camera2D = %Camera
 @onready var pause: Control = %Pause
@@ -30,6 +31,10 @@ var _ammo_restock_amount: int = 2
 @onready var cities: Node2D = %Cities
 @onready var rand = RandomNumberGenerator.new()
 @onready var noise = FastNoiseLite.new()
+
+
+func _enter_tree() -> void:
+	get_tree().node_added.connect(_connect_button_sfx)
 
 
 func _ready() -> void:
@@ -72,6 +77,17 @@ func _process(delta: float) -> void:
 		return
 	
 	camera.offset = _screen_shake_decay(delta, SHAKE_DECAY_RATE)
+
+
+func _connect_button_sfx(node: Node) -> void:
+	if node is Button:
+		node.mouse_entered.connect(_button_hovered)
+		node.focus_entered.connect(_button_hovered)
+		node.pressed.connect(_button_pressed)
+	
+	if node is HSlider:
+		node.mouse_entered.connect(_button_hovered)
+		node.focus_entered.connect(_button_hovered)
 
 
 func _start_new_game() -> void:
@@ -194,6 +210,14 @@ func _screen_shake_decay(delta: float, decay_rate: float) -> Vector2:
 		noise.get_noise_2d(1, _noise_i) * _shake_strength,
 		noise.get_noise_2d(100, _noise_i) * _shake_strength
 	)
+
+
+func _button_hovered() -> void:
+	audio_bus.play_button_hovered()
+
+
+func _button_pressed() -> void:
+	audio_bus.play_button_selected()
 
 
 func _quit_game() -> void:

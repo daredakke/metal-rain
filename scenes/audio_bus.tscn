@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ebnhlnrcgnh3"]
+
+[ext_resource type="Script" path="res://scripts/audio_bus.gd" id="1_m2j41"]
+[ext_resource type="AudioStream" uid="uid://ce0tvs4v6dgpx" path="res://assets/sfx/blip-1.wav" id="2_hjekk"]
+[ext_resource type="AudioStream" uid="uid://drylh3cswwalt" path="res://assets/sfx/blip-2.wav" id="3_fus0w"]
+
+[node name="AudioBus" type="Node"]
+script = ExtResource("1_m2j41")
+
+[node name="ButtonHoverSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hjekk")
+max_polyphony = 6
+bus = &"SFX"
+
+[node name="ButtonPressSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fus0w")
+volume_db = -2.0

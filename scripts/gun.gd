@@ -14,6 +14,9 @@ var _hp: int = MAX_HP:
 	set(value):
 		_hp = clampi(value, 0, MAX_HP)
 		
+		if _hp == 1:
+			modulate = Color.from_hsv(1.0, 0.6, 1.0, 1.0)
+		
 		if _hp == 0:
 			is_active = false
 			hide()
@@ -53,6 +56,7 @@ func restore() -> void:
 	collision.disabled = false
 	_hp = MAX_HP
 	
+	modulate = Color.from_hsv(1.0, 0.0, 1.0, 1.0)
 	show()
 
 

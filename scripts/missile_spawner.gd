@@ -49,6 +49,10 @@ func start() -> void:
 	spawn_delay_timer.start()
 
 
+func stop() -> void:
+	spawn_delay_timer.stop()
+
+
 func reset() -> void:
 	mirv_chance = INIT_MIRV_CHANCE
 	salvo_size = INIT_SALVO_SIZE

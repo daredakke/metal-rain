@@ -11,7 +11,7 @@ var _hp: int = MAX_HP:
 	set(value):
 		_hp = clampi(value, 0, MAX_HP)
 		
-		if _hp < 1:
+		if _hp == 1:
 			city_destroyed.emit()
 			hide()
 			collision.set_deferred("disabled", true)

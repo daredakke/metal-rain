@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ebnhlnrcgnh3"]
+[gd_scene load_steps=11 format=3 uid="uid://ebnhlnrcgnh3"]
 
 [ext_resource type="Script" path="res://scripts/audio_bus.gd" id="1_m2j41"]
 [ext_resource type="AudioStream" uid="uid://ce0tvs4v6dgpx" path="res://assets/sfx/blip-1.wav" id="2_hjekk"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://mjdbeotm4ynn" path="res://assets/sfx/damage-1.wav" id="6_gckid"]
 [ext_resource type="AudioStream" uid="uid://biuarng6qdtef" path="res://assets/sfx/explosion-3.wav" id="7_6fuxd"]
 [ext_resource type="AudioStream" uid="uid://bafyo07if6ai8" path="res://assets/sfx/explosion-4.wav" id="8_e5hen"]
+[ext_resource type="AudioStream" uid="uid://cf26xavyrol6g" path="res://assets/music/futility.mp3" id="9_1hnbt"]
+[ext_resource type="AudioStream" uid="uid://d1ubpoigxyop7" path="res://assets/music/ruins.mp3" id="10_11v7u"]
 
 [node name="AudioBus" type="Node"]
 script = ExtResource("1_m2j41")
@@ -55,6 +57,19 @@ max_polyphony = 16
 panning_strength = 0.6
 bus = &"SFX"
 
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_1hnbt")
+volume_db = -1.0
+pitch_scale = 0.9
+bus = &"Music"
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_11v7u")
+volume_db = -1.0
+bus = &"Music"
+
 [connection signal="finished" from="MissileExplosionSFX" to="." method="_on_missile_explosion_sfx_finished"]
 [connection signal="finished" from="PlayerShotSFX" to="." method="_on_player_shot_sfx_finished"]
 [connection signal="finished" from="PlayerShotExplosionSFX" to="." method="_on_player_shot_explosion_sfx_finished"]
+[connection signal="finished" from="GameMusic" to="." method="_on_game_music_finished"]
+[connection signal="finished" from="MenuMusic" to="." method="_on_menu_music_finished"]

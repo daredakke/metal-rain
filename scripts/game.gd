@@ -56,6 +56,7 @@ func _ready() -> void:
 	cities.city_damaged.connect(_shake_screen)
 	cities.city_destroyed.connect(_shake_screen)
 	fade_out.fade_out_complete.connect(_game_over)
+	splash.splash_ended.connect(_play_menu_music)
 	
 	_resize_screen(_current_mode)
 	rand.randomize()
@@ -94,13 +95,15 @@ func _connect_button_sfx(node: Node) -> void:
 func _start_new_game() -> void:
 	Global.game_started = true
 	point_defence.can_fire = true
-	
+
+	audio_bus.play_game_music()
 	missile_spawner.start()
 
 
 func _new_game_transition() -> void:
 	_level = 1
 	
+	audio_bus.stop_menu_music()
 	_unpause_game()
 	
 	for city in cities.get_children():
@@ -140,6 +143,8 @@ func _end_level() -> void:
 
 func _fade_out() -> void:
 	point_defence.can_fire = false
+	missile_spawner.stop()
+	audio_bus.stop_game_music()
 	
 	fade_out.start()
 
@@ -149,7 +154,8 @@ func _game_over() -> void:
 	camera.offset = Vector2.ZERO
 	Global.game_started = false
 	
-	audio_bus._play_transition_level_shown()
+	audio_bus.play_transition_level_shown()
+	_play_menu_music()
 	game_over.show()
 	pause.continue_button.hide()
 	_pause_game()
@@ -210,6 +216,10 @@ func _screen_shake_decay(delta: float, decay_rate: float) -> Vector2:
 		noise.get_noise_2d(1, _noise_i) * _shake_strength,
 		noise.get_noise_2d(100, _noise_i) * _shake_strength
 	)
+
+
+func _play_menu_music() -> void:
+	audio_bus.play_menu_music()
 
 
 func _button_hovered() -> void:

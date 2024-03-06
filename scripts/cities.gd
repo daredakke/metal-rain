@@ -21,8 +21,10 @@ func _on_city_damaged() -> void:
 
 func _on_city_destroyed() -> void:
 	_cities_destroyed += 1
+	print("CITY DESTROYED")
 	
 	city_destroyed.emit(10.0, 20.0)
 	
 	if _cities_destroyed == get_child_count():
+		print("ALL CITIES DESTROYED")
 		all_cities_destroyed.emit()

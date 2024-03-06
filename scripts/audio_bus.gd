@@ -9,6 +9,8 @@ extends Node
 @onready var transition_message_sfx: AudioStreamPlayer = $TransitionMessageSFX
 @onready var transition_level_sfx: AudioStreamPlayer = $TransitionLevelSFX
 @onready var player_shot_explosion_sfx: AudioStreamPlayer2D = $PlayerShotExplosionSFX
+@onready var game_music: AudioStreamPlayer = $GameMusic
+@onready var menu_music: AudioStreamPlayer = $MenuMusic
 
 
 func _ready() -> void:
@@ -17,6 +19,22 @@ func _ready() -> void:
 	Global.player_shot_exploded.connect(_play_player_shot_exploded)
 	Global.transition_message_shown.connect(_play_transition_message_shown)
 	Global.transition_level_shown.connect(play_transition_level_shown)
+
+
+func play_game_music() -> void:
+	game_music.play()
+
+
+func stop_game_music() -> void:
+	game_music.stop()
+
+
+func play_menu_music() -> void:
+	menu_music.play()
+
+
+func stop_menu_music() -> void:
+	menu_music.stop()
 
 
 func play_button_pressed() -> void:
@@ -58,6 +76,14 @@ func _on_player_shot_sfx_finished() -> void:
 
 func _on_player_shot_explosion_sfx_finished() -> void:
 	_modulate_pitch(player_shot_explosion_sfx)
+
+
+func _on_game_music_finished() -> void:
+	play_game_music()
+
+
+func _on_menu_music_finished() -> void:
+	play_menu_music()
 
 
 func _modulate_pitch(audio_player: AudioStreamPlayer2D) -> void:

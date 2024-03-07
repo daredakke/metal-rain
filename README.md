@@ -2,6 +2,7 @@
 
 The cold war has turned hot. Defend your sector as long as you can.
 
+![Screenshot of point defence gameplay](screenshot.png)  
 
 ## Controls  
 

@@ -3,6 +3,7 @@ extends Node2D
 
 
 const SHAKE_DECAY_RATE: float = 10
+const INIT_AMMO_RESTOCK_AMOUNT: int = 2
 
 var _shake_speed: float:
 	set(value):
@@ -103,6 +104,7 @@ func _start_new_game() -> void:
 func _new_game_transition() -> void:
 	Global.missiles_shot_down = 0
 	Global.level = 1
+	_ammo_restock_amount = INIT_AMMO_RESTOCK_AMOUNT
 	
 	audio_bus.stop_menu_music()
 	_unpause_game()
@@ -125,7 +127,7 @@ func _start_level_transition() -> void:
 func _next_level() -> void:
 	point_defence.can_fire = true
 	
-	_ammo_restock_amount += 3 if Global.level % 3 == 0 else 0
+	_ammo_restock_amount += 2 if Global.level % 3 == 0 else 0
 	
 	point_defence.restock_ammo(_ammo_restock_amount)
 	

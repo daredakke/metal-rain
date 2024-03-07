@@ -40,9 +40,11 @@ theme_override_constants/margin_bottom = 16
 
 [node name="TitleLabel" type="Label" parent="PausePanel/PauseMargin"]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 25
 text = "POINT DEFENCE"
+horizontal_alignment = 1
 
 [node name="ButtonsVBox" type="VBoxContainer" parent="PausePanel/PauseMargin"]
 layout_mode = 2
@@ -80,6 +82,7 @@ text = "QUIT"
 
 [node name="SettingsPanel" type="Panel" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

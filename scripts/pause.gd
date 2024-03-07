@@ -62,6 +62,24 @@ func _process(_delta: float) -> void:
 			game_continued.emit()
 
 
+func load_settings() -> void:
+	_on_music_slider_value_changed(Global.settings.music_volume)
+	_on_sfx_slider_value_changed(Global.settings.sfx_volume)
+	_resolution_changed(Global.settings.window_scale)
+	
+	music_slider.value = Global.settings.music_volume
+	sfx_slider.value = Global.settings.sfx_volume
+	
+	if Global.settings.window_scale == Global.Mode.WINDOW_ONE:
+		one_x_check_box.button_pressed = true
+	elif Global.settings.window_scale == Global.Mode.WINDOW_TWO:
+		two_x_check_box.button_pressed = true
+	else:
+		fullscreen_check_box.button_pressed = true
+	
+	film_grain_check_box.button_pressed = Global.settings.film_grain
+
+
 func _on_new_game_button_pressed() -> void:
 	continue_button.show()
 	_delay_process = true
@@ -82,6 +100,7 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_settings_close_button_pressed() -> void:
+	_save_settings()
 	settings_panel.hide()
 
 
@@ -120,3 +139,19 @@ func _on_film_grain_check_box_toggled(toggled_on: bool) -> void:
 
 func _resolution_changed(mode: int) -> void:
 	resolution_changed.emit(mode)
+
+
+func _save_settings() -> void:
+	var music_volume: float = music_slider.value
+	var sfx_volume: float = sfx_slider.value
+	var window_scale: int
+	var film_grain: bool = film_grain_check_box.button_pressed
+	
+	if one_x_check_box.button_pressed:
+		window_scale = Global.Mode.WINDOW_ONE
+	elif two_x_check_box.button_pressed:
+		window_scale = Global.Mode.WINDOW_TWO
+	else:
+		window_scale = Global.Mode.FULLSCREEN
+
+	Global.save_settings(music_volume, sfx_volume, window_scale, film_grain)

@@ -8,7 +8,7 @@ signal gun_destroyed(shake_strength: float, shake_speed: float)
 signal ammo_changed(value: int)
 
 const STARTING_AMMO: int = 6
-const MAX_AMMO: int = 39
+const MAX_AMMO: int = 30
 const SHAKE_STRENGTH: float = 4.0
 const SHAKE_SPEED: float = 30.0
 const PLAYER_BULLET: PackedScene = preload("res://scenes/player_bullet.tscn")

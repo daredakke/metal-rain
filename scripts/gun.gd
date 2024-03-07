@@ -5,7 +5,7 @@ extends Area2D
 signal gun_damaged
 signal gun_destroyed
 
-const MAX_HP: int = 10
+const MAX_HP: int = 8
 const MIN_FIRE_RANGE: int = 32
 
 var is_active: bool = true
@@ -19,6 +19,8 @@ var _hp: int = MAX_HP:
 		
 		if _hp == 0:
 			is_active = false
+			
+			collision.set_deferred("disabled", true)
 			hide()
 			gun_destroyed.emit()
 
@@ -64,5 +66,4 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("explosion") and not area.is_player_explosion:
 		_hp -= 1
 		
-		collision.set_deferred("disabled", true)
 		gun_damaged.emit()

@@ -4,7 +4,6 @@ extends Node2D
 
 const SHAKE_DECAY_RATE: float = 10
 
-var _current_mode: int = Global.Mode.WINDOW_ONE
 var _shake_speed: float:
 	set(value):
 		_shake_speed = clampf(value, 0.0, 100.0)
@@ -12,7 +11,6 @@ var _noise_i: float = 0.0
 var _shake_strength: float = 0.0:
 	set(value):
 		_shake_strength = clampf(value, 0.0, 100.0)
-var _level: int = 1
 var _ammo_restock_amount: int = 2
 
 @onready var audio_bus: AudioBus = %AudioBus
@@ -58,10 +56,12 @@ func _ready() -> void:
 	fade_out.fade_out_complete.connect(_game_over)
 	splash.splash_ended.connect(_play_menu_music)
 	
-	_resize_screen(_current_mode)
-	rand.randomize()
 	noise.seed = randi()
 	noise.frequency = 0.5
+	
+	pause.load_settings()
+	#_resize_screen(_current_mode)
+	rand.randomize()
 	_pause_game()
 	crosshair.randomise_rotation()
 
@@ -101,7 +101,8 @@ func _start_new_game() -> void:
 
 
 func _new_game_transition() -> void:
-	_level = 1
+	Global.missiles_shot_down = 0
+	Global.level = 1
 	
 	audio_bus.stop_menu_music()
 	_unpause_game()
@@ -118,13 +119,13 @@ func _new_game_transition() -> void:
 
 func _start_level_transition() -> void:
 	point_defence.can_fire = false
-	level_transition.start(_level)
+	level_transition.start(Global.level)
 
 
 func _next_level() -> void:
 	point_defence.can_fire = true
 	
-	_ammo_restock_amount += 3 if _level % 3 == 0 else 0
+	_ammo_restock_amount += 3 if Global.level % 3 == 0 else 0
 	
 	point_defence.restock_ammo(_ammo_restock_amount)
 	
@@ -136,7 +137,7 @@ func _next_level() -> void:
 
 
 func _end_level() -> void:
-	_level += 1
+	Global.level += 1
 	
 	level_end_delay.start()
 

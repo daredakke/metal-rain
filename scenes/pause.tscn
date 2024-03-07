@@ -211,7 +211,6 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
-button_pressed = true
 button_group = SubResource("ButtonGroup_n8gan")
 text = "1x"
 

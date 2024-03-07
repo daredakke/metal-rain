@@ -5,6 +5,7 @@ extends Node2D
 const SHAKE_DECAY_RATE: float = 10
 const INIT_AMMO_RESTOCK_AMOUNT: int = 2
 
+var _level_transitioning: bool = false
 var _shake_speed: float:
 	set(value):
 		_shake_speed = clampf(value, 0.0, 100.0)
@@ -71,7 +72,7 @@ func _process(delta: float) -> void:
 	if not Global.game_started:
 		return
 		
-	if Input.is_action_just_pressed("pause") and not Global.game_paused:
+	if Input.is_action_just_pressed("pause") and not Global.game_paused and not _level_transitioning:
 		_pause_game()
 	
 	# Don't process camera shake if game paused
@@ -121,11 +122,13 @@ func _new_game_transition() -> void:
 
 func _start_level_transition() -> void:
 	point_defence.can_fire = false
+	_level_transitioning = true
 	level_transition.start(Global.level)
 
 
 func _next_level() -> void:
 	point_defence.can_fire = true
+	_level_transitioning = false
 	
 	_ammo_restock_amount += 2 if Global.level % 3 == 0 else 0
 	

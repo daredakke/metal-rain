@@ -51,6 +51,7 @@ func start() -> void:
 
 func stop() -> void:
 	spawn_delay_timer.stop()
+	_look_for_missiles = false
 
 
 func reset() -> void:

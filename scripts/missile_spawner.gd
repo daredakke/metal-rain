@@ -5,17 +5,17 @@ extends Node2D
 signal level_over
 
 const MAX_SPAWN_X: int = 320
-const SPREAD: float = -22.5
+const SPREAD: float = -24
 const INIT_MIRV_CHANCE: float = 0.05
 const INIT_SALVO_SIZE: int = 3
-const INIT_MISSILE_SPEED: float = 15.0
-const INIT_SPAWN_DELAY: float = 2.0
+const INIT_MISSILE_SPEED: float = 15.5
+const INIT_SPAWN_DELAY: float = 1.95
 const MISSILE_SCENE: PackedScene = preload("res://scenes/missile.tscn")
 const MISSILE_TRAIL_SCENE: PackedScene = preload("res://scenes/missile_trail.tscn")
 
 var mirv_chance: float:
 	set(value):
-		mirv_chance = clampf(value, 0.05, 0.8)
+		mirv_chance = clampf(value, 0.05, 0.825)
 var salvo_size: int:
 	set(value):
 		salvo_size = clampi(value, 1, 99)

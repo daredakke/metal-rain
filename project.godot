@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="point-defence"
+config/version="1.0.0.0"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=240
 boot_splash/show_image=false
 boot_splash/use_filter=false
+config/icon="res://assets/city.png"
+config/windows_native_icon="res://city.ico"
 
 [autoload]
 

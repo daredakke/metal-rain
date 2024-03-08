@@ -58,6 +58,7 @@ func restore() -> void:
 	collision.disabled = false
 	_hp = MAX_HP
 	
+	ready_indicator.hide()
 	modulate = Color.from_hsv(1.0, 0.0, 1.0, 1.0)
 	show()
 

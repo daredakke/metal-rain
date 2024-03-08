@@ -18,6 +18,7 @@ var ammo_left: int:
 	set(value):
 		ammo_left = clampi(value, 0, _ammo_max)
 
+var _guns_destroyed: int = 0
 var _ammo_max: int = MAX_AMMO
 var _total_shots_fired: int = 0
 var _shots_fired: int:
@@ -39,6 +40,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	# Both guns are destroyed
+	if not guns[0].is_active and not guns[1].is_active:
+		return
+	
 	if not can_fire or _shots_fired >= ammo_left:
 		return
 	
@@ -73,6 +78,7 @@ func restock_ammo(ammo_restock) -> void:
 
 
 func reset() -> void:
+	_guns_destroyed = 0
 	ammo_left = STARTING_AMMO
 	_ammo_max = MAX_AMMO
 	_shots_fired = 0
@@ -113,9 +119,18 @@ func _on_gun_damaged() -> void:
 
 
 func _on_gun_destroyed() -> void:
-	_ammo_max = ceili(MAX_AMMO * 0.5)
+	_guns_destroyed += 1
 	
-	if ammo_left - _shots_fired > _ammo_max:
-		ammo_left = _ammo_max
+	# Cut max ammo in half
+	if _guns_destroyed == 1:
+		_ammo_max = ceili(MAX_AMMO * 0.5)
+		
+		if ammo_left - _shots_fired > _ammo_max:
+			ammo_left = _ammo_max
+	
+	# No ammo if no guns
+	if _guns_destroyed == 2:
+		_ammo_max = 0
+		ammo_left = 0
 	
 	gun_destroyed.emit(10.0, 20.0)

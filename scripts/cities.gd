@@ -25,4 +25,5 @@ func _on_city_destroyed() -> void:
 	city_destroyed.emit(10.0, 20.0)
 	
 	if _cities_destroyed == get_child_count():
+		_cities_destroyed = 0
 		all_cities_destroyed.emit()
